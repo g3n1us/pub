@@ -283,9 +283,9 @@ function replace_script_tags(editor){
 	else return current_markup;
 }
 
-CKEDITOR.plugins.addExternal( 'mdc_ad', '/app/2016/js/ckeditor_plugins/mdc_ad/' );
-CKEDITOR.plugins.addExternal( 'g3n1us_component', '/app/2016/js/ckeditor_plugins/g3n1us_component/' );
-CKEDITOR.plugins.addExternal( 'article_embed', '/app/2016/js/ckeditor_plugins/article_embed/' );
+CKEDITOR.plugins.addExternal( 'mdc_ad', '/vendor/pub/js/ckeditor_plugins/mdc_ad/' );
+CKEDITOR.plugins.addExternal( 'g3n1us_component', '/vendor/pub/js/ckeditor_plugins/g3n1us_component/' );
+CKEDITOR.plugins.addExternal( 'article_embed', '/vendor/pub/js/ckeditor_plugins/article_embed/' );
 CKEDITOR.config.embed_provider = '//iframe.ly/api/oembed?url={url}&callback={callback}&api_key=2af12597b56249147b3e43';
 
 
@@ -297,7 +297,7 @@ function init_ckeditors(){
 		else
 			$(this).ckeditor({
 				// contentsCss: stylesheets.toArray(),
-				contentsCss: ['https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700', '/app/2016/ckeditor.css'],
+				contentsCss: ['https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700', '/vendor/pub/ckeditor.css'],
 				stylesheetParser_skipSelectors: /(^body\.|^svg\.)/i,
 				// 			     stylesheetParser_validSelectors: /(^span\.text)/i,
 				emailProtection: 'encode',
@@ -305,7 +305,7 @@ function init_ckeditors(){
 				imageUploadUrl : "/filemanager?show_response=1&article_id="+article_id,
 // 				imageUploadUrl : "/dashboard/upload/1/"+article_id,
 				filebrowserBrowseUrl: '/filemanager',
-				templates_files: [ '/app/2016/js/ckeditor_templates.js' ],
+				templates_files: [ '/vendor/pub/js/ckeditor_templates.js' ],
 				templates_replaceContent: false,
 				extraPlugins: 'mdc_ad,g3n1us_component,article_embed',
 				// embed_provider: '//iframe.ly/api/oembed?api_key=2af12597b56249147b3e43'
