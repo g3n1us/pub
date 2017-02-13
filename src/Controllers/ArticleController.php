@@ -51,7 +51,6 @@ class ArticleController extends BaseController
     public function store(Request $request)
     {
 	    $article = new Article;
-	    $article->unique_id = "id".rand();
 	    $article->title = $request->title;
 	    $article->short_title = $request->title;
 	    $article->summary = $request->summary;
@@ -98,7 +97,7 @@ class ArticleController extends BaseController
 	    if(!$article->pub_date) $article->pub_date = \Carbon\Carbon::now();
 	    if(!$article->author_display) $article->author_display = auth()->user()->name;
 		// import old tags system
-		$article->legacy_sections;
+//		$article->legacy_sections;
 		$article->load('tags', 'files', 'authors');
 		if(!$article->workflow) $article->workflow = new Workflow;
 	    $data['article'] = $article;
@@ -132,7 +131,6 @@ class ArticleController extends BaseController
 // 	    $article = ($article == $slug) ? $article : $slug;
 	    if(!$article || !$article->id) {
 		    $article = new Article;
-		    $article->unique_id = "id".rand();
 		    $article->save();
 		    $content = new ArticleContent;
 		    $article->content()->save($content);
@@ -174,7 +172,7 @@ class ArticleController extends BaseController
 		$tags_sync = [];		
 		if($request->tags){
 			foreach($request->tags as $reqtag){
-				$newtag = Tag::firstOrCreate(['handle' => str_slug($reqtag)]);
+				$newtag = Tag::firstOrNew(['handle' => str_slug($reqtag)]);
 				$newtag->name = $reqtag;
 				$newtag->save();
 				$tags_sync[] = $newtag->id;

@@ -41,7 +41,6 @@ CREATE TABLE `article_contents` (
 
 CREATE TABLE `articles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `unique_id` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `subtitle` varchar(255) DEFAULT NULL,

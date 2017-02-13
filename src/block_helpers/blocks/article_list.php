@@ -11,13 +11,16 @@ return [
 				$limit = $block->field2 ?: 5;
 				$show_pagination = $block->field3;
 			    $foundtag = Tag::where('handle', $tag)->orWhere('name', $tag)->first();
-			    if($show_pagination)
+			    if(!$foundtag) $articles = [];
+			    else if($show_pagination)
 					$articles = $foundtag->articles()->paginate($limit);
 				else 
 					$articles = $foundtag->articles()->limit($limit)->get();
 			    $data['articles'] = $articles;
-				
-				return SmartyView::fetch('parts/raw_article_list.tpl', $data);
+// 				dd((string) view('pub::parts.raw_article_list', $data));
+				return view('pub::parts.raw_article_list', $data)->__toString();
+
+// 				return SmartyView::fetch('parts/raw_article_list.tpl', $data);
 			},
 			'edit_form' => function($block){
 				$show_pagination = $block->field3;				

@@ -14,7 +14,7 @@ return [
 				else $article = Article::findOrFail($block->key1);
 				$data = ['articles' => [$article]];
 // 				dd($data);
-				$wrappedcontent = SmartyView::fetch('parts/raw_article_list.tpl', $data);
+				$wrappedcontent = view('parts.raw_article_list', $data)->__toString();
 				return "<h2>{$block->title}<small><br>{$block->text1}</small></h2>$wrappedcontent";
 // 			    return ($block->editmode) ? '<div class="blockeditwrapper" style="position:relative;" data-bID="' . $block->id . '" data-container="body" data-content=\''.$block->editorbuttons.'\' id="blockID-'.$block->id.'">' . $wrappedcontent . '</div>' : $wrappedcontent;
 			},
