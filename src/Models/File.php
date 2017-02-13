@@ -43,7 +43,7 @@ class File extends BaseModel
 		    $return['full_filename'] = "http://cdn.washingtonexaminer.biz/cache/1060x600-$hash.jpg";
 	    }
 	    $return['filename'] = str_replace('originals/', '', $filename);	    	    
-	    if(ends_with($return['filename'], '.pdf')) $return['full_filename'] = Storage::disk('s3')->url("placeholders/pdf.svg");	    
+	    if(ends_with($return['filename'], '.pdf')) $return['full_filename'] = Storage::disk(config('pub.filesystem'))->url("placeholders/pdf.svg");	    
 	    if(ends_with($return['filename'], '.svg')) $return['dir'] = "originals";
 	    if(ends_with($return['filename'], '.gif')) $return['dir'] = "originals";
 	    return $return;
@@ -53,13 +53,13 @@ class File extends BaseModel
 	    extract(File::getPhotoFilenameAndDir($this));
 	    if($full_filename) 
 		    return '<img src="'.$full_filename.'">';	    	    	    
-	    return '<img src="'.Storage::disk('s3')->url("$dir/$filename").'">';
+	    return '<img src="'.Storage::disk(config('pub.filesystem'))->url("$dir/$filename").'">';
     }
     
     public function getUrlAttribute(){
 	    extract(File::getPhotoFilenameAndDir($this));	
 	    if($full_filename) return $full_filename;		    	    
-	    return Storage::disk('s3')->url("$dir/$filename");
+	    return Storage::disk(config('pub.filesystem'))->url("$dir/$filename");
     }
     
     
@@ -67,21 +67,21 @@ class File extends BaseModel
 	    extract(File::getPhotoFilenameAndDir($this));	
 	    if($full_filename) return $full_filename;
 	    $dir = $dir ?: 'resized/small';
-	    return Storage::disk('s3')->url("$dir/$filename");
+	    return Storage::disk(config('pub.filesystem'))->url("$dir/$filename");
     }
     
     public function getSquareAttribute(){
 	    extract(File::getPhotoFilenameAndDir($this));	
 	    if($full_filename) return $full_filename;
 	    $dir = $dir ?: 'resized/cropped-to-square';
-	    return Storage::disk('s3')->url("$dir/$filename");
+	    return Storage::disk(config('pub.filesystem'))->url("$dir/$filename");
     }
         
     public function getMediumAttribute(){
 	    extract(File::getPhotoFilenameAndDir($this));	
 	    if($full_filename) return $full_filename;		    		    		    
 	    $dir = $dir ?: 'resized/large';
-	    return Storage::disk('s3')->url("$dir/$filename");
+	    return Storage::disk(config('pub.filesystem'))->url("$dir/$filename");
     }
     
     

@@ -4,7 +4,7 @@ return [
 	
 	'users_model' => \G3n1us\Pub\Models\User::class,
 	
-	'filesystem' => env('PUB_FILESYSTEM'),
+	'filesystem' => env('PUB_FILESYSTEM', 's3'),
 	
 	'dropbox_filesystem'  => [
 	        'driver'           => 'dropbox',

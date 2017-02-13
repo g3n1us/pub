@@ -74,7 +74,7 @@ class FileController extends BaseController
 	    if(!is_array($files)) $files = [$files];
 	    foreach($files as $file){
 		    if ($file->isValid()) {
-			    $path = $file->store('originals', 's3');
+			    $path = $file->store('originals', config('pub.filesystem'));
 			    $related_article = null;
 			    if($article_id) $related_article = Article::find($article_id);
 			    $filemodel = new File;
@@ -87,7 +87,7 @@ class FileController extends BaseController
 				    $filemodel->save();
 			}		    
 	    }
-	    $url = Storage::disk('s3')->url($path);
+	    $url = Storage::disk(config('pub.filesystem'))->url($path);
 		if($showresponse === true || $showresponse == 1)
 		    return ['uploaded' => 1, 'filename' => basename($path), 'url' => $url];
 	    else{
