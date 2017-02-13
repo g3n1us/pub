@@ -1,3 +1,4 @@
 vendor
 _TRASH
 src/resources/assets/_assets
+composer.lock
