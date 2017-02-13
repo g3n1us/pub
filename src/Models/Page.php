@@ -56,12 +56,14 @@ class Page extends BaseModel
     }
         
     public function blocks(){
-	    return $this->hasMany(Block::class, 'pageSid', 'page_sid');
+	    return $this->hasMany(Block::class);
     }
     
+/*
     public function original_blocks(){
 	    return $this->hasMany(Block::class, 'pageSid', 'page_sid');
     }
+*/
     
 /*
     public function getUrlAttribute($value){

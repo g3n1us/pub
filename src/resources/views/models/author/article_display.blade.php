@@ -3,7 +3,6 @@
 				<a href="/author/{{$article->author_display}}">
 					<img class="rounded-circle pull-left mr-1" style="max-width: 75px" src="{{$article->author_from_displayname->mugshot}}">
 				</a>
-				@endif
 				<div class="d-block mt-1">
 					<a href="/author/{{urlencode($article->author_display)}}" rel="author">By {{$article->author_display}}</a>
 					<nav class="author-social d-inline-block ml-1 text-muted" style="xtransform: translate(0,-4px);">
@@ -18,7 +17,7 @@
 						@endif
 					</nav>
 				</div>
-				
+				@endif
 				<time class="text-muted" pubdate datetime="{{$article->pub_date->toAtomString()}}" title="{{$article->pub_date->toDayDateTimeString()}}">
 				<a tabindex="0" pubdate href="/by-date/{{$article->pub_date->toAtomString()}}" data-date="{{$article->pub_date->toAtomString()}}">{{$article->pub_date->toDayDateTimeString()}}</a></time>
 			</h5>

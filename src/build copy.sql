@@ -1,12 +1,13 @@
+
 CREATE TABLE `areas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `page_id` int(11) DEFAULT NULL,
-  `article_id` int(11) DEFAULT NULL,
+  `page_id` int(11) NOT NULL,
+  `article_id` int(11) NOT NULL,
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `layout` text COLLATE utf8_unicode_ci,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `config` text COLLATE utf8_unicode_ci,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `layout` text COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `config` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -45,14 +46,19 @@ CREATE TABLE `articles` (
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
-  `short_title` varchar(255) DEFAULT NULL,
+  `short_title` varchar(255) NOT NULL,
   `photo_id` bigint(20) unsigned DEFAULT NULL,
+  `lead_photo_layout` tinyint(3) unsigned DEFAULT NULL,
+  `profile_id` bigint(20) unsigned NOT NULL DEFAULT '5',
+  `urgency` tinyint(4) NOT NULL DEFAULT '8',
   `summary` text NOT NULL,
-  `author_display` varchar(255) DEFAULT NULL,
-  `pub_date` timestamp NULL DEFAULT NULL,
+  `author_display` varchar(255) NOT NULL,
+  `pub_date` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `approved` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `comment_level_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `show_enriched` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -119,39 +125,51 @@ CREATE TABLE `blocks` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `handle` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `widgetTypeId` int(10) unsigned DEFAULT NULL,
-  `area_id` int(10) unsigned DEFAULT NULL,
-  `page_id` int(10) unsigned DEFAULT NULL,  
-  `weight` int(10) unsigned DEFAULT 0,
-  `template_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `key1` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `key2` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `field1` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field2` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field3` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field4` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field5` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field6` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field7` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field8` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field9` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field10` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field11` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field12` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field13` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field14` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field15` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field16` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field17` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field18` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field19` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `field20` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `text1` longtext CHARACTER SET utf8 DEFAULT NULL,
-  `text2` longtext CHARACTER SET utf8 DEFAULT NULL,
-  `text3` longtext CHARACTER SET utf8 DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `siteSid` varchar(32) CHARACTER SET utf8 NOT NULL,
+  `pageSid` varchar(32) CHARACTER SET utf8 NOT NULL,
+  `area_id` int(10) unsigned NOT NULL,
+  `weight` int(10) unsigned NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `templateName` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `caching` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `cacheSecs` mediumint(8) unsigned NOT NULL DEFAULT '60',
+  `active` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `sponsor` mediumtext CHARACTER SET utf8 NOT NULL,
+  `modifiedTime` datetime NOT NULL,
+  `key1` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `key2` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `field1` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field2` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field3` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field4` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field5` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field6` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field7` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field8` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field9` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field10` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field11` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field12` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field13` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field14` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field15` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field16` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field17` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field18` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field19` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `field20` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `text1` longtext CHARACTER SET utf8 NOT NULL,
+  `text2` longtext CHARACTER SET utf8 NOT NULL,
+  `text3` longtext CHARACTER SET utf8 NOT NULL,
+  `currentVersion` int(20) NOT NULL DEFAULT '0',
+  `dayPartStartTime` datetime DEFAULT NULL,
+  `dayPartEndTime` datetime DEFAULT NULL,
+  `dayPartEnabled` tinyint(4) DEFAULT '0',
+  `dayPartNoEnd` tinyint(4) DEFAULT '0',
+  `date` date DEFAULT NULL,
+  `platform` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `config` text DEFAULT NULL,
+  `page_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -165,18 +183,18 @@ CREATE TABLE `brands` (
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `slug` char(3) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `footer_logo` text COLLATE utf8_unicode_ci,
-  `social_area` text COLLATE utf8_unicode_ci,
-  `facebook` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `twitter` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `domain` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `bg_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `logo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `footer_logo` text COLLATE utf8_unicode_ci NOT NULL,
+  `social_area` text COLLATE utf8_unicode_ci NOT NULL,
+  `facebook` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `twitter` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bg_image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `body-bg` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '#fff',
   `styles` text COLLATE utf8_unicode_ci,
   `sidebar_bg_color` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'rgba(238, 238, 238, 0.7)',
-  `css` text COLLATE utf8_unicode_ci,
-  `landingcontent` text COLLATE utf8_unicode_ci,
+  `css` text COLLATE utf8_unicode_ci NOT NULL,
+  `landingcontent` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -225,12 +243,12 @@ CREATE TABLE `files` (
   `bucket` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mime_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `extension` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` json NOT NULL,
+  `metadata` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3127869 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -270,12 +288,12 @@ CREATE TABLE `pages` (
   `url` varchar(255) NOT NULL COMMENT 'rename this field to slug',
   `name` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
-  `controller` varchar(50) NOT NULL DEFAULT 'page_controller',
-  `config` json NOT NULL,
-  `template` varchar(255) DEFAULT 'page_default',
+  `controller` varchar(50) NOT NULL DEFAULT 'page_default.tpl',
+  `config` text NOT NULL,
+  `template` varchar(255) DEFAULT '',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=909 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -324,11 +342,11 @@ CREATE TABLE `social_accounts` (
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nickname` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `metadata` json NOT NULL,
+  `metadata` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -368,7 +386,7 @@ CREATE TABLE `taggables` (
   `tag_id` bigint(20) NOT NULL,
   `taggable_id` int(10) unsigned NOT NULL,
   `taggable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` json NOT NULL,
+  `metadata` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   KEY `taggables_taggable_id_taggable_type_index` (`taggable_id`,`taggable_type`)
@@ -383,7 +401,7 @@ CREATE TABLE `tags` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` json NOT NULL,
+  `metadata` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -406,6 +424,12 @@ CREATE TABLE `user_groups` (
 
 
 
+# Dump of table users
+# ------------------------------------------------------------
+
+ALTER TABLE `users` ADD `username` VARCHAR(191)  CHARACTER SET utf8mb4  COLLATE utf8mb4_unicode_ci  NOT NULL  DEFAULT ''  AFTER `name`;
+ALTER TABLE `users` ADD `role` VARCHAR(20)  CHARACTER SET utf8mb4  COLLATE utf8mb4_unicode_ci  NOT NULL  DEFAULT 'username';
+
 
 
 # Dump of table workflows
@@ -422,10 +446,4 @@ CREATE TABLE `workflows` (
   `notes` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-# Dump of table users
-# ------------------------------------------------------------
-
-ALTER TABLE `users` ADD `username` VARCHAR(191)  CHARACTER SET utf8mb4  COLLATE utf8mb4_unicode_ci  NOT NULL  DEFAULT ''  AFTER `name`;
-ALTER TABLE `users` ADD `role` VARCHAR(20)  CHARACTER SET utf8mb4  COLLATE utf8mb4_unicode_ci  NOT NULL  DEFAULT 'username';
 

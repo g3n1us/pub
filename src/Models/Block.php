@@ -14,7 +14,7 @@ use BlockMorpher;
 class Block extends BaseModel
 {
     
-    public $timestamps = false;
+//     public $timestamps = false;
     
 	protected $casts = [
 		'config'  => 'object',
