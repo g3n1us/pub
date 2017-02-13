@@ -19,7 +19,6 @@ class Article extends BaseModel
     protected $dates = ['created_at', 'updated_at', 'pub_date'];
     
 	protected $keystoforget = [
-		'legacy_sections' => BRAND_SLUG.'_legacy_sections|',
 		'article_full' => 'article_',
 		'article_lead_photo_' => 'article_lead_photo_',
 		'article_versions_' => 'article_versions_',
@@ -165,7 +164,7 @@ class Article extends BaseModel
     public function getLegacySectionsAttribute(){
 	    
 	    if(!$this->tags || $this->tags->isEmpty()){
-		    $cachekey = BRAND_SLUG.'_legacy_sections|'.$this->id;
+		    $cachekey = 'legacy_sections|'.$this->id;
 //		    return Cache::remember("$cachekey", 999, function(){
 			    $tags = DB::table('newsok7.section_rels')
 				    ->leftJoin('newsok7.sections', 'newsok7.sections.section_id', '=', 'newsok7.section_rels.section_id')	    

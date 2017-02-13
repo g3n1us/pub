@@ -105,7 +105,6 @@ class PageController extends BaseController
 	    $data['page'] = $page;
 	    $templatename = ends_with($page->template, '.tpl') ? str_replace('.tpl', '', $page->template) : $page->template;
 	    return view('pub::'.$templatename, $data);
-// 	    return response(SmartyView::fetch($page->template, $data));
     }    
 
     /**

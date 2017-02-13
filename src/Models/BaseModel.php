@@ -19,7 +19,7 @@ class BaseModel extends Model
     }
     
     public function getBrandAttribute(){
-	    return Brand::where('slug', BRAND_SLUG)->first();
+	    return Brand::first();
     }
     
     
@@ -39,40 +39,9 @@ class BaseModel extends Model
 	    $data['page'] = $classhandle == "page" ? $this : null;
 	    $data['heading'] = $this->heading;
 		return view("pub::$template", $data);
-// 		return SmartyView::fetch($template, $data);
 
     }
     
-/*
-    public function __wakeup(){
-	    if(class_basename( get_class($this) ) == 'Article'){
-*/
-/*
-		    if(!array_get($this->original, 'pub_date') || array_get($this->original, 'pub_date') == '0000-00-00 00:00:00'){
-			    $this->pub_date = '1970-01-01 00:00:00';
-		    }
-		    if(!array_get($this->original, 'status')){
-			    $this->status = 0;
-		    }
-*/
-// 		    $this->pub_date = '1970-01-01';
-/*
-		    
-		    $article_defaults = [
-			    'pub_date'   => '1970-01-01',
-		    ];
-		    dump($this->getAttribute('pub_date'));
-		    foreach($article_defaults as $k => $article_default){
-			    if(!is_object($this->{$k}))
-				    $this->{$k} = $article_default;
-		    }
-			    
-*/
-/*
-	    }
-	    parent::__wakeup();
-	    
-    }
-*/
+
 
 }

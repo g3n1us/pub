@@ -43,7 +43,7 @@ class BlockController extends BaseController
 	    $type = $request->get('type', 'content');	    
 	    $newblock->handle = $type;
 	    $newblock->config = ['isDefault' => true];
-	    $defaultcontents = config('concrete.block_types.'.$type.'.default_content', 'concrete.block_types.default.default_content');
+	    $defaultcontents = config('pub.block_types.'.$type.'.default_content', 'pub.block_types.default.default_content');
 	    foreach($defaultcontents as $k => $v){
 		    $newblock->{$k} = $v;
 	    }
@@ -106,20 +106,3 @@ class BlockController extends BaseController
     }
 }
 
-
-
-/*
-	    $typeidmap = [
-		    'content' => 99,
-		    'html' => 5,
-		    'article_list' => 2,
-		    'smarty' => 10,
-		    'lead_story' => 69,
-		    'google_sheets' => 69,
-		    'data_api' => 69,
-	    ];
-*/
-// 	    $newblock->widgetTypeId = array_get($typeidmap, $type, 99);
-
-// 	    $newblock->content = config('concrete.block_types.'.$newblock->type.'.default_content');
-// 	    if(is_array($newblock->content)) $newblock->content = implode('~', $newblock->content);

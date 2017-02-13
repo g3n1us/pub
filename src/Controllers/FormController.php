@@ -27,7 +27,7 @@ class FormController extends Controller
 	
 	public function send_email(\App\Form $form){
         Mail::send('emails.form_submitted', ['form' => $form], function ($m) use ($form) {
-			$m->subject('Contact Form Submission on MediaDC Advertising');
+			$m->subject('Contact Form Submission');
 			foreach(config('app.mail-recipients') as $recipient)
 	            $m->to($recipient['address'], $recipient['name']);
         });		

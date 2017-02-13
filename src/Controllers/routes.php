@@ -55,7 +55,7 @@ Route::group(['middleware' => ['web']], function () {
 		
 // 	Route::post('submit-form', 'FormController@store');
 	
-	Route::delete('ajax/files', 'HomeController@deleteFile');	
+// 	Route::delete('ajax/files', 'HomeController@deleteFile');	
 	
 //	Route::get('ajax/article-files/{article}', function($brand, $article){
 //		return $article ? $article->files : null;

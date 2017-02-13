@@ -25,11 +25,11 @@ class File extends BaseModel
 	
 	
     public function tags(){
-        return $this->morphToMany(Tag::class, 'taggable', 'wex_ditto2.taggables')->withPivot('metadata');
+        return $this->morphToMany(Tag::class, 'taggable', 'taggables')->withPivot('metadata');
     }    
     
     public function articles(){
-        return $this->morphedByMany(Article::class, 'fileable', 'wex_ditto2.fileables')->withPivot('metadata');
+        return $this->morphedByMany(Article::class, 'fileable', 'fileables')->withPivot('metadata');
     }
     
     private static function getPhotoFilenameAndDir($file){

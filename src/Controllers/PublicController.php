@@ -35,7 +35,7 @@ class PublicController extends BaseController
 	    $data['brand'] = $this->brand;
 	    $data['user'] = Auth::user();
 		$data['heading'] = "Home";   
-		$data['articles'] = Cache::remember(BRAND_SLUG.'_home_article_list', 60, function(){
+		$data['articles'] = Cache::remember('home_article_list', 60, function(){
 			return Article::limit(20)->get();
 		});
 		return view('pub::home', $data);
@@ -57,7 +57,7 @@ class PublicController extends BaseController
 // 		    return response(SmartyView::fetch('authors.tpl', $data));
 		    
 	    }
-	    $author = Cache::remember(BRAND_SLUG.'_author_data_'.$request->url(), 60, function() use($author){
+	    $author = Cache::remember('author_data_'.$request->url(), 60, function() use($author){
 	    	return Author::where('handle', $author)->orWhere('displayname', $author)->with('articles')->firstOrFail();
 	    });
 	    

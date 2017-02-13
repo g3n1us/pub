@@ -61,7 +61,7 @@ class AuthorController extends BaseController
      */
     public function show(Request $request, $author)
     {
-	    $author = Cache::remember(BRAND_SLUG.'_author_data_'.$request->url(), 60, function() use($author){
+	    $author = Cache::remember('author_data_'.$request->url(), 60, function() use($author){
 	    	return Author::where('handle', urldecode($author))->orWhere('displayname', urldecode($author))->with('articles')->firstOrFail();
 	    });
 //		$data['viewname'] = 'brands.'.$brand->slug.'.home';
