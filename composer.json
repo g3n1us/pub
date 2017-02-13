@@ -19,6 +19,9 @@
         
     },
     "autoload": {
+        "psr-4": {
+            "G3n1us\\Pub\\": "src/"
+        },	    
 		"files": [
 			"src/Controllers/helpers.php"
 		] 
