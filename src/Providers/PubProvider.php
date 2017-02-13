@@ -2,7 +2,8 @@
 
 namespace G3n1us\Pub\Providers;
 
-require dirname(dirname(__DIR__)).'/vendor/autoload.php';
+if(file_exists(dirname(dirname(__DIR__)).'/vendor/autoload.php'))
+	require dirname(dirname(__DIR__)).'/vendor/autoload.php';
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;

@@ -1,9 +1,9 @@
 
-<header class="pt-6 header">
+<header class="pt-6 header" style="background-image: none;">
 	<nav class="topbar flex-row navbar nav fixed-top navbar-dark bg-inverse mb-1 justify-content-between" style="z-index: 900;">
 		
  		&#9776; 
-		<a href="/">@include('pub::svg.e')</a>
+		<a href="/"><img src="/vendor/pub/files/SpringfieldShopper.png" alt="SpringfieldShopper" id="washington-examiner-logo" alt="SpringfieldShopper"></a>
 		@verbatim
 		<script type="text/template" id="header_article_list">
 			{{#each this}} <a style="color:#fff" href="{{url}}" class="mr-1"><small class="text-danger">{{relative_date}}</small> {{str_limit short_title 40}}</a> {{/each}}
