@@ -162,25 +162,7 @@ class Article extends BaseModel
     
     
     public function getLegacySectionsAttribute(){
-	    
-	    if(!$this->tags || $this->tags->isEmpty()){
-		    $cachekey = 'legacy_sections|'.$this->id;
-//		    return Cache::remember("$cachekey", 999, function(){
-			    $tags = DB::table('newsok7.section_rels')
-				    ->leftJoin('newsok7.sections', 'newsok7.sections.section_id', '=', 'newsok7.section_rels.section_id')	    
-				    ->where('newsok7.section_rels.module_id', $this->id)
-				    ->pluck('section');
-		
-				
-			    return collect($tags)->transform(function($tag){
-				    $tmptag = Tag::firstOrCreate(['name' => $tag, 'handle' => str_slug($tag)]);
-				    if(!$this->tags()->find($tmptag->id))
-					    $this->tags()->attach($tmptag->id);
-				    return $tmptag;
-			    });
-//		    });
-	    }
-	    else return collect([]);
+	    return $this->tags;
     }
     
 /*
