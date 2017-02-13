@@ -2,7 +2,7 @@
 @php
 $article = $articles->first();
 @endphp
-	<link rel="stylesheet" href="/app/2016/js/includes/At.js-master/dist/css/jquery.atwho.min.css">
+	<link rel="stylesheet" href="/vendor/pub/js/includes/At.js-master/dist/css/jquery.atwho.min.css">
 
 				<form method="post" id="editorForm" class="pa-1" action="{{ route('article.update', $articles->first(), false) }}">
 				{!! csrf_field() !!}
@@ -16,7 +16,7 @@ $article = $articles->first();
 						<option value="draft">Draft</option>
 						<option value="under-review" @if($articles->first()->workflow && $articles->first()->workflow->status == "under-review") selected @endif >Initial Review</option>
 						<option value="final-review" @if($articles->first()->workflow && $articles->first()->workflow->status == "final-review") selected @endif >Final Review</option>
-						<option value="final {if $articles->first()->workflow && $articles->first()->workflow->status == "final"}selected@endif">Final</option>
+						<option value="final" @if($articles->first()->workflow && $articles->first()->workflow->status == "final") selected @endif>Final</option>
 					</select>
 					
 					
