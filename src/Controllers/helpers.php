@@ -315,3 +315,42 @@ if(!function_exists('array_to_object')){
 	    return (object) $array;
 	}
 }
+
+
+if(!function_exists('editbuttons')){
+	function editbuttons($block){
+	    $editorbuttons = [];
+	    $editorbuttons[] = '<span data-editoraction="EDITOR--delete_block" data-bID="' . $block->id . '" class="tiny-edit-button tiny-delete-button">Delete Block</span>';
+	    $editorbuttons[] = '<span data-XXtarget="#blockID-'.$block->id.'" data-editoraction="EDITOR--edit_button" data-bID="' . $block->id . '" class="tiny-edit-button EDITOR--edit_button">Edit Block</span>';
+		
+		return implode('', $editorbuttons);
+	}		
+}
+	
+if(!function_exists('block_config')){
+	function block_config($type, $prop = null){
+		$block_types = [
+			'content'  =>         include dirname(__DIR__)."/block_helpers/blocks/content.php",
+
+			'html'  =>            include dirname(__DIR__)."/block_helpers/blocks/html.php",
+
+			'page_list'  =>       include dirname(__DIR__)."/block_helpers/blocks/page_list.php",
+
+			'default'  =>         include dirname(__DIR__)."/block_helpers/blocks/default.php",
+
+			'google_sheets' =>    include dirname(__DIR__)."/block_helpers/blocks/google_sheets.php",
+
+			'data_api' =>         include dirname(__DIR__)."/block_helpers/blocks/data_api.php",
+
+			'article_list'  =>    include dirname(__DIR__)."/block_helpers/blocks/article_list.php",
+
+			'lead_story'  =>      include dirname(__DIR__)."/block_helpers/blocks/lead_story.php",			
+		];	
+	    $defaultcontents = config('pub.block_types.'.$type.'.default_content', 'pub.block_types.default.default_content');
+		
+		if($prop)
+			return array_get($block_types[$type], $prop, array_get($block_types, "default.$prop"));	
+		else	
+			return $block_types[$type];
+	}
+}

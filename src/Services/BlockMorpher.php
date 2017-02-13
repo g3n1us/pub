@@ -27,8 +27,11 @@ class BlockMorpher{
 
 		$this->handle = $this->block->handle ?: 'content';
 		if($this->handle == 'html-block') $this->handle = 'html';
-		$func = config("pub.block_types.{$this->handle}.resolve_content");
-		if(!$func) $func = config("pub.block_types.default.resolve_content");
+// 		$func = config("pub.block_types.{$this->handle}.resolve_content");
+
+// 		if(!$func) $func = config("pub.block_types.default.resolve_content");
+
+		$func = block_config($this->handle, 'resolve_content');
 
 		$this->content = call_user_func_array($func, [$this]);
 		
@@ -55,7 +58,8 @@ class BlockMorpher{
 
 	public function __get($prop){
 // 		$from_config = config("concrete.block_types.{$this->block->type}.$prop", false);
-		$from_config = config("pub.block_types.{$this->handle}.$prop", false);
+// 		$from_config = config("pub.block_types.{$this->handle}.$prop", false);
+		$from_config = block_config($this->handle, $prop);
 		if(method_exists($this, "get".studly_case($prop)))
 			return $this->{"get".studly_case($prop)}();
 		else if( $from_config )

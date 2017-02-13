@@ -124,7 +124,9 @@ class DashboardController extends BaseController
 	    ];
 	    $newblock->handle = $type;
 	    $newblock->config = ['isDefault' => true];
-	    $defaultcontents = config('pub.block_types.'.$type.'.default_content', 'pub.block_types.default.default_content');
+// 	    $defaultcontents = config('pub.block_types.'.$type.'.default_content', 'pub.block_types.default.default_content');
+
+	    $defaultcontents = block_config($type, 'default_content');
 	    foreach($defaultcontents as $k => $v){
 		    $newblock->{$k} = $v;
 	    }

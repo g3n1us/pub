@@ -24,6 +24,7 @@ return [
     
     'versions_bucket'   => env('VERSIONS_BUCKET'),
 	
+/*
 	'block_types' => [
 		'content'  => include __DIR__."/blocks/content.php",
 		
@@ -42,4 +43,5 @@ return [
 		'lead_story'  => include __DIR__."/blocks/lead_story.php",
 		
 	]
+*/
 ];
