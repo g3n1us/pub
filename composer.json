@@ -1,0 +1,31 @@
+{
+    "name": "g3n1us/pub",
+    "description": "Open Source Publication Software",
+    "type": "pro\b\b\b",
+    "authors": [
+        {
+            "name": "Sean Bethel",
+            "email": "sean@americanmadeweb.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "5.3",
+        "league/flysystem-dropbox": "^1.0",
+        "league/flysystem": "^1.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-ziparchive": "^1.0",        
+        "michelf/php-markdown": "^1.6",
+        "laravel/socialite": "^2.0",
+        "phpoffice/phpword": "v0.13.*"    
+        
+    },
+    "autoload": {
+		"files": [
+			"src/Controllers/helpers.php"
+		] 
+    },
+    "require-dev": {
+        "raveren/kint": "^1.0"
+    }
+}

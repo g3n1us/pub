@@ -1,0 +1,225 @@
+a{
+	cursor: pointer;
+}
+
+/* add .nav-justified, see: https://github.com/twbs/bootstrap/issues/18653 */
+/*
+.home .nav-justified {
+	width: 100%;
+}
+.home .nav-justified .nav-item {
+	float: none;
+}
+.home .nav-justified .nav-link {
+	width: 100%;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.mainnav .nav-justified .nav-link[href="/"]{
+	display: block;
+	float: left;
+}
+
+@media (min-width: 768px) {
+  .home .nav-justified .nav-item {
+    display: table-cell;
+    width: 1%;
+  }
+  .home .nav-justified .nav-link {
+    margin-bottom: 0;
+  }
+}
+*/
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator {
+	color: red;
+	width: 20px;
+	height: 16px;
+}
+input[type="datetime-local"]{
+	position: relative;
+}
+input[type="date"]:hover:after,
+input[type="datetime-local"]:hover:after {
+	content: " Date Picker ";
+	color: #555;
+	padding-right: 5px;
+	position: absolute;
+	top:-8px;
+	right: 0;
+	background-color: #fff;
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+
+
+.editor-bootstrap .editor-bar{
+	color: #545454;
+}
+
+.mdc--ad{
+	width: 320px;
+	height: 250px;
+/*
+	background-image: linear-gradient(#252525 0%, #cfcfcf 100%);
+	color: white;
+	font-size: 3rem;
+	text-align: center;
+	line-height: 90px;
+	margin-bottom: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: none;
+*/
+}
+
+.ad, .mdc--ad{
+	background-color: rgba(176, 176, 176, 0.2);
+	position: relative;
+}
+.ad::before, .mdc--ad::before{
+	content: "Advertisement";
+    font-size: 10px;
+    line-height: 1;
+    color: #8c8888;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+}
+
+.ad > *:first-child{
+	position: absolute;
+	top: 5px;
+	bottom:0;
+	right: 0;
+	left: 0;
+	margin: auto;
+}
+
+
+.form-group[class*="has-"] .form-control-label{
+	background-color: #fff;
+}
+
+.editor-bootstrap .tag{
+	padding: 0.4em 0.25em;
+}
+
+.editor-bootstrap .input_token > .tag .close {
+    position: absolute;
+    top: 0;
+    right: auto !important;
+    left: 5px;
+    bottom: 0;
+}
+
+.editor-bootstrap .selected_author_text, .editor-bootstrap .input_token_text{
+    padding-right: 0.5rem !important;
+    padding-left: 1.5rem;
+}
+
+.editor-bootstrap .editor-bar{
+/* 	z-index: 800 !important; */
+}
+
+.modal-dialog{
+	margin: 50px auto;
+}
+
+/* TWS Tweaks */
+.tws .bg-inverse {
+    color: #fff !important;
+    background-color: #00264A!important;
+}
+.tws .bg-inverse path[fill="#030000"]{
+	fill: #ffffff;
+}
+.tws .footer{
+	background-image: url(/2016/images/capitol.svg);
+    background-size: 58%;
+    background-position: 55vw center;
+    background-blend-mode: color-burn;
+}
+
+.tws.home .header{
+	background-image: url(/2016/images/capitol.svg);
+	background-position: -20vw 10px;
+	background-size: 60vw;
+	background-blend-mode: color-burn;
+}
+
+.tws .header .navbar.topbar a > svg{
+	height: 40px;
+	margin-left: 1rem;
+    width: auto;
+    margin-top: -10px;
+    margin-bottom: -10px;	
+}
+
+.tws.home .mainnav .washington-examiner-logo-text-only{
+	top: calc(-100% - 2.8rem);
+}
+    
+.btn[href*="twitter"] {
+    background-color: #00aced;
+    border-color: #00aced;
+}
+
+
+
+.subpage-sidebar::-webkit-scrollbar {
+/*     width: 5px; */
+/*     height: 13px; */
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+.subpage-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.5); 
+}
+
+ul{
+	list-style-position: inside;
+}
+
+.hide, .hidden{
+	display: none !important;
+}
+
+#filebrowseruploadtab{
+	text-align: center;
+	font-size: 4rem;
+	vertical-align: middle;
+	padding: 7rem 1rem;
+	background-color: white;
+	box-shadow: inset 0px 0px 11px black;
+    border-radius: 5px;
+    line-height: 1;
+}
+
+.editor-bootstrap .input_token>.tag .close{
+	top: -2px !important;
+}
+
+
+#filemanager_blade_outer + .editor-bootstrap .editor-bar{
+	display: none;
+}
+
