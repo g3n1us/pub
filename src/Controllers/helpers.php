@@ -303,3 +303,15 @@ if(!function_exists('cache_key')){
 		return "$prefix$id$authstring";
 	}
 }
+
+
+if(!function_exists('is_plural')){
+	function is_plural($string){
+		return str_plural($string) == $string;
+	}
+}
+if(!function_exists('array_to_object')){
+	function array_to_object($array) {
+	    return (object) $array;
+	}
+}
