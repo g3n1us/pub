@@ -1,7 +1,7 @@
 {
     "name": "g3n1us/pub",
     "description": "Open Source Publication Software",
-    "type": "pro\b\b\b",
+    "type": "php",
     "authors": [
         {
             "name": "Sean Bethel",
@@ -10,7 +10,6 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "illuminate/support": "5.3",
         "league/flysystem-dropbox": "^1.0",
         "league/flysystem": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
