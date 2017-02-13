@@ -7,6 +7,8 @@ use DB;
 use Page;
 use Brand;
 
+use Aws\S3\S3Client;
+
 /**
  * Installer for the package
  */
@@ -17,7 +19,7 @@ class Install  extends Command{
      *
      * @var string
      */
-    protected $signature = 'pub:install';
+    protected $signature = 'pub:install {fn=install} {arg=null}';
 
     /**
      * The console command description.
@@ -33,7 +35,26 @@ class Install  extends Command{
      */
     public function handle()
     {
-	    
+	    $fn = $this->argument('fn');
+	    $arg = $this->argument('arg');
+	    $arg = $arg === 'null' ? null : $arg;
+	    return $this->{$fn}($arg);
+    }
+
+
+    private function create_bucket($bucketname){
+	    $client = new S3Client([
+		    'version' => 'latest',
+		    'region'  => 'us-east-1',
+	    ]);
+	     
+	    $client->createBucket([
+		    'Bucket' => $bucketname,
+	    ]);
+    }
+
+    
+    private function install(){
 		$sql = file_get_contents(__DIR__.'/build.sql');
 		$pdo = DB::connection()->getPdo();
 		$pdo->exec($sql);
@@ -50,11 +71,7 @@ class Install  extends Command{
 		$homepage->description = 'The home page';
 		$homepage->config = [];
 		$homepage->save();
-
-		
-
-
-    }	
+    }
 	
 }	
 	

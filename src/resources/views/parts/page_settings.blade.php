@@ -17,15 +17,15 @@
 	</fieldset>
 	<fieldset class="form-group">
 		<label class="form-control-label">Meta Keywords</label>
-		<input type="text" name="config->keywords" class="form-control" value="{$page->config->get('keywords')}">
+		<input type="text" name="config->keywords" class="form-control" value="{{$page->config->get('keywords')}}">
 	</fieldset>
 	<fieldset class="form-group">
 		<label class="form-control-label">Robots</label>
 		<select name="config->robots" class="form-control">
 			<option value="">Allow All</option>
-			<option value="noindex, nofollow" {if $page->config->get('robots') == "noindex, nofollow"}selected{/if}>noindex, nofollow</option>
-			<option value="noindex" {if $page->config->get('robots') == "noindex"}selected{/if}>noindex</option>
-			<option value="nofollow" {if $page->config->get('robots') == "nofollow"}selected{/if}>nofollow</option>
+			<option value="noindex, nofollow" @if($page->config->get('robots') == "noindex, nofollow") selected @endif>noindex, nofollow</option>
+			<option value="noindex" @if($page->config->get('robots') == "noindex") selected @endif>noindex</option>
+			<option value="nofollow" @if($page->config->get('robots') == "nofollow") selected @endif>nofollow</option>
 		</select>	
     </fieldset>
 	<fieldset class="form-group">
