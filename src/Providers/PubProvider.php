@@ -71,8 +71,10 @@ class PubProvider extends ServiceProvider
 		});
 		
         Article::saved(function ($article) {
-	        $article->load('tags', 'photo', 'files', 'content', 'authors'); 
-			Storage::disk('s3')->put('page_versions/'.$article->id, serialize($article));
+	        if(config('filesystems.disks.s3.bucket')){
+		        $article->load('tags', 'photo', 'files', 'content', 'authors'); 
+				Storage::disk('s3')->put('page_versions/'.$article->id, serialize($article));		        
+	        }
 // 			clear caches
 			$article->flush_cache();
         });	    
