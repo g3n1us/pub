@@ -33,4 +33,4 @@ Once this is done, you can run setup via our CLI Artisan command:
 
 This will walk you through setup.
 
-Cheers! :beer:
+Cheers! :beers:
