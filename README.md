@@ -29,7 +29,7 @@ After this you must add the Pub service providers array in `config/app.php`.
 
 Once this is done, you can run setup via our CLI Artisan command:
 
-	php composer pub
+	php artisan pub
 
 This will walk you through setup.
 
