@@ -3,7 +3,7 @@ A CMS for publications. Built on Laravel, installable as a Composer package.
 
 ## Installation
 Install Laravel as normal. 
-https://laravel.com/docs/5.4/installation
+https://laravel.com/docs/installation
 
 It is best to install Pub on top of a fresh Laravel installation. The Pub installer will set up database connections, AWS resources, Google login and Dropbox integration.
 
