@@ -20,7 +20,7 @@ After this you must add the Pub service providers array in `config/app.php`.
            */
           Illuminate\Auth\AuthServiceProvider::class,
           Illuminate\Broadcasting\BroadcastServiceProvider::class,
-    // ...    
+		  // ...    
 
           G3n1us\Pub\Providers\PubProvider::class,        
           G3n1us\Pub\Providers\PubRouteProvider::class,        

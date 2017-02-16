@@ -61,6 +61,19 @@ ooo        oooooo    ooooooo
 		    'DROPBOX_CLIENT_ID'      => "• Setup your Dropbox app that will house your Indesign copy for the print workflow",
 		    'GOOGLE_CLIENT_ID'       => "• Setup Google login so your users can securely access to application with their Google credentials", 
 	    ];
+	    
+	    private $bucket_policy = '{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"AddPerm",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::examplebucket/*"]
+    }
+  ]
+}';
 	
 	
     /**
@@ -70,7 +83,6 @@ ooo        oooooo    ooooooo
      */
     public function handle()
     {
-	    dd(env('DB_SETUP_COMPLETE'));
 	    $this->comment($this->logo);
 	    $fn = $this->argument('fn');
 	    return $this->{$fn}();
@@ -92,10 +104,14 @@ ooo        oooooo    ooooooo
     public function __construct(){
 		parent::__construct();
 	    
+	    $this->s3client = new S3Client([
+		    'version' => 'latest',
+		    'region'  => 'us-east-1',
+	    ]);
+
 	    $this->setupfile = base_path('.pubsetup');
 	    
 	    $this->env_contents = @file_get_contents($this->setupfile);
-// 	    dd(explode("\n", trim($this->env_contents)));
 	    $this->done = [];   
 	    foreach(explode("\n", trim($this->env_contents)) as $line){
 		    $line = trim($line);
@@ -109,6 +125,7 @@ ooo        oooooo    ooooooo
 	    }
     }
     
+    
     private function revert(){
 	    $this->error('You are about to erase your configuration');
 	    if ($this->confirm('Do you wish to continue?')) {
@@ -120,12 +137,16 @@ ooo        oooooo    ooooooo
 		$this->cleanup = false;
     }
     
+    
 	private function all(){
 		$this->comment('Greetings! Let\'s get started with setup...');
 		$this->comment('...');
 		$this->comment("Just answer the questions that follow to:  \n • create a bucket for files, \n • setup an Elastic Beanstalk environment to host your production site \n • create your Lambda functions that will handle image resizing and some other tasks");
 		$this->info('FYI These values will be written to your .env file at the root of your project.');
-	    if (!$this->confirm('Ready?')) exit;
+	    if (!$this->confirm('Ready?')) {
+		    $this->cleanup = false;
+		    exit;
+	    }
 	    
 	    $this->create_files_bucket();
 	    
@@ -140,12 +161,7 @@ ooo        oooooo    ooooooo
 		    $this->comment("You need to create a bucket to be used for storing versions of your stories and archival copies of your work.");
 		    if(!$this->confirm("Would you like to continue with creating this bucket?")) return;
 		    $bucketname = $this->ask('What should your bucket be named?');
-		    $client = new S3Client([
-			    'version' => 'latest',
-			    'region'  => 'us-east-1',
-		    ]);
-		     
-		    $created = $client->createBucket([
+		    $created = $this->s3client->createBucket([
 			    'Bucket' => $bucketname,
 		    ]);
 		    $this->mock_progress();
@@ -166,14 +182,17 @@ ooo        oooooo    ooooooo
 		    $this->comment("You need to create a bucket to be used for storing your site's files");
 		    if(!$this->confirm("Would you like to continue with creating this bucket?")) return;
 		    $bucketname = $this->ask('What should your bucket be named?');
-		    $client = new S3Client([
-			    'version' => 'latest',
-			    'region'  => 'us-east-1',
-		    ]);
-		     
-		    $created = $client->createBucket([
+		    $created = $this->s3client->createBucket([
 			    'Bucket' => $bucketname,
 		    ]);
+		    
+			$policy = str_replace('examplebucket', $bucketname, $this->bucket_policy);
+		    
+			$result = $this->s3client->putBucketPolicy([
+			    'Bucket' => $bucketname, // REQUIRED
+			    'Policy' => $policy, // REQUIRED
+			]);
+		    
 		    $this->mock_progress();
 		    if($created) $this->done['S3_BUCKET'] = $bucketname;
 		    else{
@@ -268,7 +287,9 @@ ooo        oooooo    ooooooo
 			else{
 				$this->backup_env();
 				
-				file_put_contents(base_path('.env'), "\n" . $this->start_string . "\n\n$mapped\n\n" . $this->end_string . "\n", FILE_APPEND);
+				$existing_env = file_get_contents(base_path('.env'));
+				file_put_contents(base_path('.env'), "\n" . $this->start_string . "\n\n$mapped\n\n" . $this->end_string . "\n\n$existing_env");
+				
 				$this->comment('The following values are now available:');
 				$this->table(['Key', 'Value'], $table);
 $this->comment("DONE!! Your configuration has been written and is available to Laravel.

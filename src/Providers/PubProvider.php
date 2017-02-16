@@ -8,6 +8,8 @@ if(file_exists(dirname(dirname(__DIR__)).'/vendor/autoload.php'))
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Relations\Relation;
+// use Illuminate\Support\Facades\View;
+
 
 // use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use View;
@@ -19,6 +21,7 @@ use Article;
 use File;
 use Storage;
 use Workflow;
+use Brand;
 
 use G3n1us\Pub\Install;
 
@@ -45,6 +48,16 @@ class PubProvider extends ServiceProvider
         if(config('pub.dropbox_filesystem'))
 	        config(['filesystems.disks.dropbox' => config('pub.dropbox_filesystem')]);
 	        
+	        
+        if(config('pub.google_auth.client_id'))
+            config(['services.google' => config('pub.google_auth')]);
+         
+
+         if(config('pub.s3_bucket'))   
+            config(['filesystems.disks.s3.bucket' => config('pub.s3_bucket')]);
+	        
+        View::share('brand', Brand::first());
+        
         
 		Relation::morphMap([
 		    'article' => Article::class,
