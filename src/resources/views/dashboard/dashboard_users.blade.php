@@ -14,13 +14,14 @@ logged_in
     </div>
     <div class="row mt-3">
 @foreach($users as $user)
-		<div class="col-md-3">
+		<div class="col-md-3 mb-3">
 	    @include('pub::models.user.user_media_object')
 		</div>
 @endforeach
-{{$users->links()}}
     </div>
     
+   {{$users->links()}}
+ 
     
 </div>
 

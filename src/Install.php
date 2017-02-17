@@ -51,7 +51,7 @@ ooo        oooooo    ooooooo
 	
 	private $write_to_env = false;
 	
-	private $cleanup = true;
+	private $cleanup = false;
 	
 	
 	private $required_steps = [
@@ -83,6 +83,7 @@ ooo        oooooo    ooooooo
      */
     public function handle()
     {
+	    $this->cleanup = true;
 	    $this->comment($this->logo);
 	    $fn = $this->argument('fn');
 	    return $this->{$fn}();
@@ -239,10 +240,9 @@ ooo        oooooo    ooooooo
     private function finish(){
 	    $required_steps = $this->required_steps;
 	    $done = array_diff(array_keys($required_steps), array_keys($this->done));
-
-	    if (empty($done) && $this->confirm('Setup is complete! Do you wish to continue and write your setup values to the .env file?')) {
-		    
-		    $this->write_to_env = true;
+	    if (empty($done)) {
+		    if($this->confirm('Setup is complete! Do you wish to continue and write your setup values to the .env file?'))
+			    $this->write_to_env = true;
 		    
 	    }
 	    else {

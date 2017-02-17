@@ -31,6 +31,11 @@
 	<script>
 		var article; // do this a better way. This is just to avoid errors for Vue.js
 	</script>
+	<style>
+		.editor-bootstrap .pagination{
+			justify-content: center;
+		}
+	</style>
 
 @show
 </head>

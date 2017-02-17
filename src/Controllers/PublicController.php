@@ -95,7 +95,8 @@ class PublicController extends BaseController
 	    $pivot = $article_file->pivot;
 	    if($pivot->metadata == "null") $pivot->update(["metadata" => "{}"]);
 		$pivot->update($request->except('_token'));
-
+		$article->flush_cache();
+		$file->flush_cache();
 	    return redirect()->back()->with('status', 'Saved');
     }
     

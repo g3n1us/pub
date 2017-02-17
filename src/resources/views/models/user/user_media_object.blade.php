@@ -1,6 +1,6 @@
 <div class="media py-2"  style="border:1px solid #9c9a9a">
 	<a href="/dashboard/users/{{$user->id}}">
-	<img class="d-flex mr-3 align-self-center" src="{{$user->avatar}}" alt="{{$user->name}}">
+	<img class="d-flex mr-3 ml-1 align-self-center" style="max-width: 100px;" src="{{$user->avatar_large}}" alt="{{$user->name}}">
 	</a>
 	<div class="media-body">
 		<a href="/dashboard/users/{{$user->id}}" style="color:black">

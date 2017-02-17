@@ -16,13 +16,6 @@ logged_in
 	    <div class="col-md-6 offset-md-3">
 	    <div class="card-deck">
 			<div class="card text-center">
-				<a href="/">
-				<img class="card-img-top" src="/files/{{$brand['logo']}}" alt="{{$brand['name']}}">
-				</a>
-				<div class="card-block">
-					<h3 class="text-center">{{$brand['name']}}</h3>
-<!-- 					<p class="card-text">Pages:</p> -->
-				</div>
 				<div class="list-group list-group-flush brand-sort-list text-xs-right">
 				
 @foreach($brand['pages'] as $brandpage)
@@ -32,10 +25,6 @@ logged_in
 						@if($brandpage['nav_hide'])<span class="tag tag-warning" rel="tooltip" title="Hidden from Navigation">Hidden</span>@endif
 						@if(!$brandpage['active'])<span class="tag tag-danger" rel="tooltip" title="Page is Inactive">Inactive</span>@endif 
 						 &nbsp; &nbsp;{{trim($brandpage['name'])}} &nbsp; &nbsp;
-	<!-- 						<span class="fa-stack"> -->
-								<i data-sort="up" rel="tooltip" title="Change page order" data-delay="900" class="sorter fa fa-sort-up fa-lg"></i>
-								<i data-sort="down" rel="tooltip" title="Change page order" data-delay="900" class="sorter fa fa-sort-down fa-lg"></i>
-	<!-- 						</span> -->
 						</span>
 					
 				    </a>

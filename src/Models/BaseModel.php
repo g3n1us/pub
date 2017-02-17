@@ -12,7 +12,7 @@ class BaseModel extends Model
 	
     public function flush_cache(){
 	    foreach($this->keystoforget as $keytoforget) {
-		    if($keytoforget == 'article_')
+// 		    if($keytoforget == 'article_')
 		    Cache::forget(cache_key($keytoforget, $this, false));
 		    Cache::forget(cache_key($keytoforget, $this, false) . '_auth');
 	    }

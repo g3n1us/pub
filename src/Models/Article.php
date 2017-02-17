@@ -7,6 +7,7 @@ namespace G3n1us\Pub\Models;
 use Illuminate\Database\Eloquent\Builder;
 use DB;
 use Cache;
+use \G3n1us\Pub\Models\File;
 
 
 use \Carbon\Carbon as Carbon;
@@ -78,7 +79,7 @@ class Article extends BaseModel
     }    
     
     public function photo(){
-        return $this->hasOne(File::class, 'article_id', 'photo_id');
+        return $this->hasOne(File::class);
 	    
 // 	    return $this->hasManyThrough(\App\Photo::class, \App\PhotoPub::class, 'photo_pub_id', 'photo_id', 'lead_photo_id');
     }
@@ -149,7 +150,7 @@ class Article extends BaseModel
     }   
     
     public function getLeadPhotoAttribute(){
-	    
+// 	    dd(cache_key('article_lead_photo_', $this, false));
 	    return Cache::remember('article_lead_photo_'.$this->id, 99999, function(){
 		    if(!$this->photo){
 			    $explicit_lead_photo = $this->files()->wherePivot('metadata->lead_photo', "true")->first();

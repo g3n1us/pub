@@ -34,7 +34,11 @@ class User extends Authenticatable
     }    
     
     public function getAvatarAttribute(){
-	    return $this->social_account->first() ? $this->social_account->first()->avatar : null;
+	    return $this->social_account->first() ? $this->social_account->first()->avatar : 'https://www.gravatar.com/avatar/'.$this->id.'?d=retro&f=y';
+    }
+    
+    public function getAvatarLargeAttribute(){
+	    return $this->social_account->first() ? $this->social_account->first()->metadata->get('avatar_original') : 'https://www.gravatar.com/avatar/'.$this->id.'?d=retro&f=y&s=400';
     }
     
     public function groups(){

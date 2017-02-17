@@ -3,16 +3,16 @@
 			<picture class="card-img-top">
 			  <source 
 			    media="(min-width: 960px)"
-			    srcset="{{object_get($article->photo, 'url')}}">
+			    srcset="{{object_get($article->lead_photo, 'url')}}">
 			  <source 
 			    media="(min-width: 768px)"
-			    srcset="{{object_get($article->photo, 'medium')}}">
+			    srcset="{{object_get($article->lead_photo, 'medium')}}">
 			  <source 
 			    media="(max-width: 480px)"
-			    srcset="{{object_get($article->photo, 'thumb')}}">
+			    srcset="{{object_get($article->lead_photo, 'thumb')}}">
 			  <img 
-			    src="{{object_get($article->photo, 'url')}}" 
-			    alt="{{object_get($article->photo, 'url')}}">
+			    src="{{object_get($article->lead_photo, 'url')}}" 
+			    alt="{{object_get($article->lead_photo, 'url')}}">
 			</picture>
 			
 		</a>

@@ -87,9 +87,10 @@ class FileController extends BaseController
 				    $filemodel->save();
 			}		    
 	    }
-	    $url = Storage::disk(config('pub.filesystem'))->url($path);
-		if($showresponse === true || $showresponse == 1)
-		    return ['uploaded' => 1, 'filename' => basename($path), 'url' => $url];
+		if($showresponse === true || $showresponse == 1){
+		    $url = Storage::disk(config('pub.filesystem'))->url($path);
+		    return ['uploaded' => 1, 'filename' => basename($path), 'url' => $url];		    
+		}
 	    else{
 		    return redirect()->back()->with(['message' => 'File(s) uploaded']);
 	    } 

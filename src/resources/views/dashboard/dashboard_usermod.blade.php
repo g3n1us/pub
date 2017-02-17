@@ -5,6 +5,9 @@ logged_in
 @endpush
 
 @section('body')
+@php
+$social_accounts = $moduser->social_account->isEmpty() ? [] : $moduser->social_account;
+@endphp
 <div class="container pt-3" style="background-color: rgba(255, 255, 255, 0.85)">
 	
     <div class="row">
@@ -17,10 +20,10 @@ logged_in
 	    <div class="col-md-4 offset-md-4">
 		    <div class="card">
 			<form  method="post">
-				<img class="card-img-top" src="{{$moduser->social_account->first()->metadata->get('avatar_original')}}" alt="">
+				<img class="card-img-top" src="{{$moduser->avatar_large}}" alt="">
 				<div class="card-block">
 					<h3> {{$moduser->name}}</h3>
-					@foreach($moduser->social_account as $account)
+					@foreach($social_accounts as $account)
 					Login: <span class="tag tag-default">{{studly_case($account->provider)}}</span>
 					@endforeach
 					<fieldset class="form-group">

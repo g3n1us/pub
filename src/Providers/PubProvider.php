@@ -93,12 +93,17 @@ class PubProvider extends ServiceProvider
         });	    
 
         
-	    $this->loadMigrationsFrom(dirname(__DIR__).'/migrations');        
+	    $this->loadMigrationsFrom(dirname(__DIR__).'/database/migrations');        
         
         
 	    $this->publishes([
 	        dirname(__DIR__).'/config/pub.php' => config_path('pub.php'),
 	    ], 'config');        
+		    	    
+	    $this->publishes([
+	        dirname(__DIR__).'/database/factories/PubModelFactory.php' => database_path('factories/PubModelFactory.php'),
+	        dirname(__DIR__).'/database/seeds/PubDatabaseSeeder.php' => database_path('seeds/PubDatabaseSeeder.php'),
+	    ], 'database');        
 		    	    
 	    
 	    $this->publishes([

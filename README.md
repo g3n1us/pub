@@ -33,4 +33,16 @@ Once this is done, you can run setup via our CLI Artisan command:
 
 This will walk you through setup.
 
+## Post Setup
+
+After setup is complete, there are some other optional steps you can take.
+
+Publish your assets from the Pub package to the site:
+
+	php artisan vendor:publish
+
+Seed the site with placeholder content:
+
+	php artisan db:seed --class=PubDatabaseSeeder
+
 Cheers! :beers:
