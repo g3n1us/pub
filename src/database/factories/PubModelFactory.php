@@ -81,7 +81,11 @@ $factory->define(ArticleContent::class, function (Faker\Generator $faker) {
 
 
 $factory->define(Tag::class, function (Faker\Generator $faker) {
-	$tag = $faker->word;
+	$tags = [];
+	$tags[] = $faker->unique()->company;	
+	$tags[] = $faker->unique()->jobTitle;	
+	$tqgs[] = $faker->unique()->catchPhrase;
+	$tag = collect($tags)->random();
     return [
         'handle' => str_slug($tag),
         'name' => $tag,

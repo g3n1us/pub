@@ -36,7 +36,7 @@ class PubDatabaseSeeder extends Seeder
 				$author = Author::inRandomOrder()->first();
                 $art->content()->save(factory(ArticleContent::class)->make());
                 $art->authors()->save($author);
-                Tag::inRandomOrder()->limit(5)->each(function($tag) use($art){
+                Tag::inRandomOrder()->limit(rand(1,5))->get()->each(function($tag) use($art){
 	                $art->tags()->save($tag);
                 });
                 factory(File::class, 2)->make()->each(function($f) use($art){

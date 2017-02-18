@@ -10,6 +10,10 @@ class Tag extends BaseModel
 {
 	
 	protected $fillable = ['handle', 'name'];
+	
+    protected $casts = [
+        'metadata' => 'collection',
+	];	
 	    
     public function articles(){
         return $this->morphedByMany(Article::class, 'taggable');
