@@ -40,7 +40,7 @@ $factory->define(Article::class, function (Faker\Generator $faker) {
         'title' => $title,
         'short_title' => str_limit($title, 50),
         'summary' => $faker->realText(300),
-        'author_display' => 'Sean Bethel',
+//         'author_display' => 'Sean Bethel',
 //         'photo_id' => $photo_id,
         'pub_date' => \Carbon\Carbon::now(),
         'approved' => 1,
@@ -51,10 +51,10 @@ $factory->define(Article::class, function (Faker\Generator $faker) {
 $factory->define(Author::class, function (Faker\Generator $faker) {
 	$firstname = $faker->firstName;
 	$lastname = $faker->lastName;
-	$tmppath = $faker->image("/tmp", 800, 800, $category);
+	$tmppath = $faker->image("/tmp", 800, 800, 'people');
     $file = new Illuminate\Http\UploadedFile($tmppath, "og.jpg");
 	$path =  $file->store('originals', config('pub.filesystem'));
-	$url = Storage::disk(config('pub.filesystem'))->get($path)->url();
+	$url = Storage::disk(config('pub.filesystem'))->url($path);
     return [
         'title' => $faker->jobTitle,
         'lastname' => $lastname,
