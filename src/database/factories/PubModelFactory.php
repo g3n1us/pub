@@ -13,6 +13,7 @@
 
 use G3n1us\Pub\Models\User;
 use G3n1us\Pub\Models\File;
+use G3n1us\Pub\Models\Tag;
 use G3n1us\Pub\Models\Author;
 use G3n1us\Pub\Models\Article;
 use G3n1us\Pub\Models\ArticleContent;
@@ -74,6 +75,17 @@ $factory->define(ArticleContent::class, function (Faker\Generator $faker) {
     return [
         'body' => '<p>' . implode('</p><p>', $faker->paragraphs(rand(5,15))) . '</p>',
 
+    ];
+});
+
+
+
+$factory->define(Tag::class, function (Faker\Generator $faker) {
+	$tag = $faker->word;
+    return [
+        'handle' => str_slug($tag),
+        'name' => $tag,
+		'metadata' => [],
     ];
 });
 
