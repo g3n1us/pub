@@ -13,6 +13,7 @@
 
 use G3n1us\Pub\Models\User;
 use G3n1us\Pub\Models\File;
+use G3n1us\Pub\Models\Author;
 use G3n1us\Pub\Models\Article;
 use G3n1us\Pub\Models\ArticleContent;
 
@@ -47,10 +48,31 @@ $factory->define(Article::class, function (Faker\Generator $faker) {
 });
 
 
+$factory->define(Author::class, function (Faker\Generator $faker) {
+	$firstname = $faker->firstName;
+	$lastname = $faker->lastName;
+	$tmppath = $faker->image("/tmp", 800, 800, $category);
+    $file = new Illuminate\Http\UploadedFile($tmppath, "og.jpg");
+	$path =  $file->store('originals', config('pub.filesystem'));
+	$url = Storage::disk(config('pub.filesystem'))->get($path)->url();
+    return [
+        'title' => $faker->jobTitle,
+        'lastname' => $lastname,
+        'firstname' => $firstname,
+        'department' => $faker->catchPhrase,
+        'email' => $faker->email,
+        'bio' => '<p>' . implode('</p><p>', $faker->paragraphs(rand(1,5))) . '</p>',
+        'displayname' => "$firstname $lastname",
+        'handle' => str_slug("$firstname $lastname"),
+        'mugshot' => $url,
+    ];
+});
+
+
 $factory->define(ArticleContent::class, function (Faker\Generator $faker) {
 
     return [
-        'body' => '<p>' . implode('</p><p>', $faker->paragraphs(10)) . '</p>',
+        'body' => '<p>' . implode('</p><p>', $faker->paragraphs(rand(5,15))) . '</p>',
 
     ];
 });

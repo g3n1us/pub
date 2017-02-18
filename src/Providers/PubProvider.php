@@ -38,7 +38,6 @@ class PubProvider extends ServiceProvider
     public function boot()
     {
 
-
 	    $this->loadViewsFrom(dirname(__DIR__).'/resources/views', 'pub');
 	    
 	    if(config('pub.users_model'))
