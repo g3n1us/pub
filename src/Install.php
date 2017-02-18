@@ -16,7 +16,8 @@ use Aws\S3\S3Client;
 class Install  extends Command{
 	
 private $logo = 
-'
+"
+🍀  🍀  🍀  🍀  🍀  🍀  🍀  🍀  🍀  🍀  
 oooooo   ooo    ooo  oooooo
 ooo  oo  ooo    ooo  ooo  oo
 ooo  oo  ooo    ooo  oo   oo
@@ -25,8 +26,8 @@ oooooo   ooo    ooo  ooooooo
 ooo      ooo    ooo  ooo   oo
 ooo      ooo    ooo  ooo   oo
 ooo        oooooo    ooooooo
-
-';
+🍀  🍀  🍀  🍀  🍀  🍀  🍀  🍀  🍀  🍀
+";
 	
     /**
      * The name and signature of the console command.
@@ -56,10 +57,11 @@ ooo        oooooo    ooooooo
 	
 	private $required_steps = [
 		    'VERSIONS_BUCKET'        => "• Create a bucket to be used for storing versions of your stories and archival copies of your work", 
-		    'S3_BUCKET'              => "• Create a bucket to save files, and archives of your publications's work", 
+		    'AWS_BUCKET'              => "• Create a bucket to save files, and archives of your publications's work", 
 		    'DB_SETUP_COMPLETE'      => "• Create database tables and fill with starter data", 
 		    'DROPBOX_CLIENT_ID'      => "• Setup your Dropbox app that will house your Indesign copy for the print workflow",
 		    'GOOGLE_CLIENT_ID'       => "• Setup Google login so your users can securely access to application with their Google credentials", 
+		    'DB_USERNAME'            => "• Enter you database credentials.",
 	    ];
 	    
 	    private $bucket_policy = '{
@@ -91,6 +93,8 @@ ooo        oooooo    ooooooo
 
 
 	private function mock_progress(){
+		echo "\n";
+		
 		$bar = $this->output->createProgressBar(3);
 		$i = 2;
 		while($i > 0){
@@ -99,6 +103,7 @@ ooo        oooooo    ooooooo
 			$i--;
 		}
 		$bar->finish();
+		echo "\n\n";
 	}
 
 
@@ -140,7 +145,7 @@ ooo        oooooo    ooooooo
     
     
 	private function all(){
-		$this->comment('Greetings! Let\'s get started with setup...');
+		$this->comment('Cheers! 🍺 🍺 Let\'s get started with setup...');
 		$this->comment('...');
 		$this->comment("Just answer the questions that follow to:  \n • create a bucket for files, \n • setup an Elastic Beanstalk environment to host your production site \n • create your Lambda functions that will handle image resizing and some other tasks");
 		$this->info('FYI These values will be written to your .env file at the root of your project.');
@@ -154,6 +159,10 @@ ooo        oooooo    ooooooo
 	    $this->create_archives_bucket();	    
 	    
 	    $this->install_db();
+	    
+	    $this->setup_google();
+	    
+	    $this->setup_dropbox();
 	    
 	}
 
@@ -179,7 +188,7 @@ ooo        oooooo    ooooooo
 
 
     private function create_files_bucket(){
-	    if(!array_key_exists('S3_BUCKET', $this->done)){
+	    if(!array_key_exists('AWS_BUCKET', $this->done)){
 		    $this->comment("You need to create a bucket to be used for storing your site's files");
 		    if(!$this->confirm("Would you like to continue with creating this bucket?")) return;
 		    $bucketname = $this->ask('What should your bucket be named?');
@@ -195,7 +204,10 @@ ooo        oooooo    ooooooo
 			]);
 		    
 		    $this->mock_progress();
-		    if($created) $this->done['S3_BUCKET'] = $bucketname;
+		    if($created) {
+			    $this->done['AWS_BUCKET'] = $bucketname;
+			    $this->done['AWS_REGION'] = 'us-east-1';
+		    }
 		    else{
 			    $this->error('Something went wrong!');
 			    return;
@@ -204,11 +216,63 @@ ooo        oooooo    ooooooo
 	    }
 		else $this->comment("Public file storage Bucket setup complete. Moving on...\n");
 	    
+    }
+    
+    
+    
+    
+	private function setup_dropbox(){
+	    if(!array_key_exists('DROPBOX_CLIENT_ID', $this->done)){
+		    $this->comment("You'll need to setup a Dropbox app via the developer console in order to use Dropbox as part of your print workflow. Go to https://www.dropbox.com/developers/apps to create one.");
+		    $this->comment("After the app is made, you will get an 'App Key', 'App Secret', and 'App Token'. \n Enter these next:");
+		    if(!$this->confirm("Would you like to continue with this step?")) return;
+		    $this->done['DROPBOX_CLIENT_ID'] = $this->ask('App key');
+		    $this->done['DROPBOX_APP_SECRET'] = $this->ask('App secret');
+		    $this->done['DROPBOX_ACCESS_TOKEN'] = $this->ask('Access Token');
+			$this->mock_progress();		    
+		    
+		}
+		else $this->comment("Dropbox setup complete. Moving on...\n");
+		
+	}    
+
+    
+    
+	private function setup_google(){
+	    if(!array_key_exists('GOOGLE_CLIENT_ID', $this->done)){
+		    $this->comment("You'll need to setup a Google API project via the developer console in order to use Google for login. Go to https://console.developers.google.com/apis/library to create one.");
+		    $this->comment("After the project is setup, you'll receive a 'Client ID' and 'Client Secret'. You'll also be asked to enter the site's domain name for use with redirects after the login prompt. \n Enter these next:");
+		    if(!$this->confirm("Would you like to continue with this step?")) return;
+		    $this->done['GOOGLE_CLIENT_ID'] = $this->ask('Client ID');
+		    $this->done['GOOGLE_CLIENT_SECRET'] = $this->ask('Client Secret');
+		    $site_domain = $this->ask("Enter this site's domain name, including http(s)://");
+		    $this->done['GOOGLE_CLIENT_REDIRECT_URL'] = str_finish($site_domain, '/') . 'oauth/google/callback';
+			$this->mock_progress();
+		    
+		    
+		}
+		else $this->comment("Dropbox setup complete. Moving on...\n");
+		
+	}    
+
+
+    private function configure_db(){
+	    if(!array_key_exists('DB_USERNAME', $this->done)){
 	    
+		    $this->comment("Enter your database credentials next.");
+		    $this->done['DB_HOST'] = $this->ask('MySQL Host');
+		    $this->done['DB_DATABASE'] = $this->ask('MySQL Database Name');
+		    $this->done['DB_USERNAME'] = $this->ask('MySQL User');
+		    $this->done['DB_PASSWORD'] = $this->ask('MySQL Password');
+			$this->mock_progress();
+	    }
+	    else $this->comment("Database credentials have been entered. Moving on...\n");
+		    
     }
 
     
     private function install_db(){
+	    
 	    if(!array_key_exists('DB_SETUP_COMPLETE', $this->done)){
 		    if ($this->confirm('You are now ready to set up the database. Do you wish to continue?')) {
 				$sql = file_get_contents(__DIR__.'/build.sql');
@@ -258,7 +322,7 @@ ooo        oooooo    ooooooo
     private function backup_env(){
 		if(!is_dir(base_path('.env_backups')))
 			mkdir(base_path('.env_backups'));
-		if(!copy(base_path('.env'), base_path('env_backups/env' . time()))){
+		if(!copy(base_path('.env'), base_path('.env_backups/env' . time()))){
 			throw new \Exception("Backup couldn't be made.");
 			die();
 		}
@@ -293,8 +357,7 @@ ooo        oooooo    ooooooo
 				$this->comment('The following values are now available:');
 				$this->table(['Key', 'Value'], $table);
 $this->comment("DONE!! Your configuration has been written and is available to Laravel.
-In the file, config/filesystems.php, change the value of the bucket to 'env(\"S3_BUCKET\")'
-Now you are good to go. Enjoy!!
+Now you're on your way. This calls for a toast!! 🍻
 ");
 				
 			}
