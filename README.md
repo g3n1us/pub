@@ -39,7 +39,7 @@ After setup is complete, publish your assets from the Pub package to the site:
 
 	php artisan vendor:publish
 
-There are some other optional steps you can take:
+### There are some other optional steps you can take:
 
 Seed the site with placeholder content:
 
