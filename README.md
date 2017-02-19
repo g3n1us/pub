@@ -1,11 +1,11 @@
 # Pub :beer:
-A CMS for publications. Built on Laravel, installable as a Composer package.
+An opiniated, Laravel based CMS for publications with deep AWS integration, installable via Composer Edit
 
 ## Installation
 Install Laravel as normal. 
 https://laravel.com/docs/installation
 
-It is best to install Pub on top of a fresh Laravel installation. The Pub installer will set up database connections, AWS resources, Google login and Dropbox integration.
+It is best to install Pub on top of a fresh Laravel installation. The Pub CLI installer will set up database connections, AWS resources, Google login and Dropbox integration.
 
 Install via Composer:
 
@@ -35,11 +35,11 @@ This will walk you through setup.
 
 ## Post Setup
 
-After setup is complete, there are some other optional steps you can take.
-
-Publish your assets from the Pub package to the site:
+After setup is complete, publish your assets from the Pub package to the site:
 
 	php artisan vendor:publish
+
+There are some other optional steps you can take:
 
 Seed the site with placeholder content:
 
