@@ -141,6 +141,8 @@ class PubProvider extends ServiceProvider
         View::addExtension('svg','blade');
         
 		$loader = \Illuminate\Foundation\AliasLoader::getInstance();
+	    $loader->alias('Socialite', \Laravel\Socialite\Facades\Socialite::class);		
+	    
 	    $loader->alias('Area', \G3n1us\Pub\Models\Area::class);		
 	    $loader->alias('Article', \G3n1us\Pub\Models\Article::class);		
 	    $loader->alias('ArticleContent', \G3n1us\Pub\Models\ArticleContent::class);		
@@ -173,6 +175,7 @@ class PubProvider extends ServiceProvider
 	    $loader->alias('SavePageRequest', \G3n1us\Pub\Requests\SavePageRequest::class);	
 	    $loader->alias('SaveUserRequest', \G3n1us\Pub\Requests\SaveUserRequest::class);	
 	    $loader->alias('DeleteUserRequest', \G3n1us\Pub\Requests\DeleteUserRequest::class);	
+	    
 	    
     }
 }

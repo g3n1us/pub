@@ -14,8 +14,8 @@ Route::group(['middleware' => ['web']], function () {
 	Auth::routes();
 	
 	
-	Route::get('oauth/{provider}', 'Auth\LoginController@redirectToProvider');
-	Route::get('oauth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+	Route::get('oauth/{provider}', 'Auth\PubLoginController@redirectToProvider');
+	Route::get('oauth/{provider}/callback', 'Auth\PubLoginController@handleProviderCallback');
 		
 	Route::get('article/{article}/files', function(Article $article){
 		return  $article->files;
