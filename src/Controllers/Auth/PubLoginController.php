@@ -14,6 +14,10 @@ use UserPolicy;
  * Provide login services for the Pub applications
  */
 class PubLoginController extends LoginController {
+	
+	protected $redirectTo = '/';
+	
+	
     /**
      * Create a new controller instance.
      *
