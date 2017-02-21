@@ -97,6 +97,7 @@ class PubProvider extends ServiceProvider
         
 	    $this->publishes([
 	        dirname(__DIR__).'/config/pub.php' => config_path('pub.php'),
+	        dirname(__DIR__).'/config/default_groups.php' => config_path('groups.php'),
 	    ], 'config');        
 		    	    
 	    $this->publishes([
@@ -134,6 +135,8 @@ class PubProvider extends ServiceProvider
     {
 	    
 	    $this->mergeConfigFrom(dirname(__DIR__).'/config/pub.php', 'pub');        	    
+	    
+	    $this->mergeConfigFrom(dirname(__DIR__).'/config/groups.php', 'groups');        	    
 	    
         View::addExtension('svg','blade');
         
