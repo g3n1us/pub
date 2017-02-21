@@ -2,7 +2,6 @@
 namespace G3n1us\Pub\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\SavePageRequest;
 
 use Page;
 use Tag;
