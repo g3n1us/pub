@@ -9,6 +9,7 @@ use Tag;
 use Article;
 use Auth;
 use SmartyView;
+use SavePageRequest;
 
 use Area;
 

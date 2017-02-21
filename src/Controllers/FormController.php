@@ -5,11 +5,9 @@ use Illuminate\Http\Request;
 use Mail;
 
 use App\Http\Requests;
-use App\Http\Requests\StoreFormRequest;
-// use App\Http\Requests\StoreFormRequest as StoreFormRequest;
-use App\Http\Controllers\Controller;
+use StoreFormRequest;
 
-class FormController extends Controller
+class FormController extends BaseController
 {
 	
     public function store(StoreFormRequest $request, $domain){
