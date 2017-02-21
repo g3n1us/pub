@@ -4,14 +4,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use G3n1us\Pub\Services\WordProcessor;
 use G3n1us\Pub\Models\Article;
+// use Auth;
 		
 
 // Route::group(['domain' => '{domain}'], function () {
 Route::group(['middleware' => ['web']], function () {
     // your routes here
 	
-	Route::get('oauth/{provider}', 'Auth\PubLoginController@redirectToProvider');
-	Route::get('oauth/{provider}/callback', 'Auth\PubLoginController@handleProviderCallback');
+	Auth::routes();
+	
+	
+	Route::get('oauth/{provider}', 'Auth\LoginController@redirectToProvider');
+	Route::get('oauth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 		
 	Route::get('article/{article}/files', function(Article $article){
 		return  $article->files;
