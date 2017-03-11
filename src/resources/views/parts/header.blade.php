@@ -49,7 +49,7 @@
 					<div class="collapse navbar-collapse" id="main-nav-items">
 						<div class="Xnav navbar-nav nav-fill XXnav-justified navbar-light justify-content-between" style="flex-grow: 1;">
 							<a href="/" class="hidden-md-down">
-								<img class="washington-examiner-logo-text-only" id="washington-examiner-logo" src="/vendor/pub/files/SpringfieldShopper.png" alt="SpringfieldShopper">
+								<img class="washington-examiner-logo-text-only" id="washington-examiner-logo" src="{{ $brand->logo }}" alt="SpringfieldShopper">
 							</a>
  							{!! show_area('main_navigation') !!}
 						    <a class="nav-item text-muted  nav-link active" href="/author">Authors <span class="sr-only">(current)</span></a>
