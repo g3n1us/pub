@@ -29,13 +29,14 @@
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {!! csrf_field() !!}
 						<div class="row">
+							@if(env('GOOGLE_CLIENT_ID'))
 						<div class="col-md-12">
 							<p class="text-center">
 							<a class="btn btn-lg btn-danger" href="/oauth/google"><i class="fa fa-google fa-3x"></i> Login with Google</a>
 							</p>
 							<h4 class="text-center">or</h4>
 						</div>
-						
+						@endif
 						<div class="col-md-6">
                         <fieldset class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="control-label">E-Mail Address</label>

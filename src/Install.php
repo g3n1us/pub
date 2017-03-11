@@ -57,11 +57,15 @@ ooo        oooooo    ooooooo
 	
 	private $required_steps = [
 		    'VERSIONS_BUCKET'        => "• Create a bucket to be used for storing versions of your stories and archival copies of your work", 
-		    'AWS_BUCKET'              => "• Create a bucket to save files, and archives of your publications's work", 
+		    'AWS_BUCKET'             => "• Create a bucket to save files, and archives of your publications's work", 
 		    'DB_SETUP_COMPLETE'      => "• Create database tables and fill with starter data", 
+		    'DB_USERNAME'            => "• Enter you database credentials.",
+	    ];
+	    
+	
+	private $optional_steps = [
 		    'DROPBOX_CLIENT_ID'      => "• Setup your Dropbox app that will house your Indesign copy for the print workflow",
 		    'GOOGLE_CLIENT_ID'       => "• Setup Google login so your users can securely access to application with their Google credentials", 
-		    'DB_USERNAME'            => "• Enter you database credentials.",
 	    ];
 	    
 	    private $bucket_policy = '{
@@ -127,8 +131,13 @@ ooo        oooooo    ooooooo
 		    $this->done[$parts[0]] = $parts[1];
 	    }
 	    foreach($this->required_steps as $k => $v){
+		    if(starts_with($k, 'DB_')) continue;
 		    if(env($k)) $this->done[$k] = env($k);
 	    }
+	    foreach($this->optional_steps as $k => $v){
+		    if(env($k)) $this->done[$k] = env($k);
+	    }
+
     }
     
     
@@ -156,7 +165,9 @@ ooo        oooooo    ooooooo
 	    
 	    $this->create_files_bucket();
 	    
-	    $this->create_archives_bucket();	    
+	    $this->create_archives_bucket();	
+	    
+	    $this->configure_db();    
 	    
 	    $this->install_db();
 	    
@@ -166,27 +177,7 @@ ooo        oooooo    ooooooo
 	    
 	}
 
-    private function create_archives_bucket(){
-	    if(!array_key_exists('VERSIONS_BUCKET', $this->done)){
-		    $this->comment("You need to create a bucket to be used for storing versions of your stories and archival copies of your work.");
-		    if(!$this->confirm("Would you like to continue with creating this bucket?")) return;
-		    $bucketname = $this->ask('What should your bucket be named?');
-		    $created = $this->s3client->createBucket([
-			    'Bucket' => $bucketname,
-		    ]);
-		    $this->mock_progress();
-		    if($created) $this->done['VERSIONS_BUCKET'] = $bucketname;
-		    else{
-			    $this->error('Something went wrong!');
-			    return;
-		    }
-		    
-	    }
-		else $this->comment("Archival Bucket setup complete. Moving on...\n");
-	    
-    }
-
-
+// 1.
     private function create_files_bucket(){
 	    if(!array_key_exists('AWS_BUCKET', $this->done)){
 		    $this->comment("You need to create a bucket to be used for storing your site's files");
@@ -217,70 +208,73 @@ ooo        oooooo    ooooooo
 		else $this->comment("Public file storage Bucket setup complete. Moving on...\n");
 	    
     }
-    
-    
-    
-    
-	private function setup_dropbox(){
-	    if(!array_key_exists('DROPBOX_CLIENT_ID', $this->done)){
-		    $this->comment("You'll need to setup a Dropbox app via the developer console in order to use Dropbox as part of your print workflow. Go to https://www.dropbox.com/developers/apps to create one.");
-		    $this->comment("After the app is made, you will get an 'App Key', 'App Secret', and 'App Token'. \n Enter these next:");
-		    if(!$this->confirm("Would you like to continue with this step?")) return;
-		    $this->done['DROPBOX_CLIENT_ID'] = $this->ask('App key');
-		    $this->done['DROPBOX_APP_SECRET'] = $this->ask('App secret');
-		    $this->done['DROPBOX_ACCESS_TOKEN'] = $this->ask('Access Token');
-			$this->mock_progress();		    
-		    
-		}
-		else $this->comment("Dropbox setup complete. Moving on...\n");
-		
-	}    
-
-    
-    
-	private function setup_google(){
-	    if(!array_key_exists('GOOGLE_CLIENT_ID', $this->done)){
-		    $this->comment("You'll need to setup a Google API project via the developer console in order to use Google for login. Go to https://console.developers.google.com/apis/library to create one.");
-		    $this->comment("After the project is setup, you'll receive a 'Client ID' and 'Client Secret'. You'll also be asked to enter the site's domain name for use with redirects after the login prompt. \n Enter these next:");
-		    if(!$this->confirm("Would you like to continue with this step?")) return;
-		    $this->done['GOOGLE_CLIENT_ID'] = $this->ask('Client ID');
-		    $this->done['GOOGLE_CLIENT_SECRET'] = $this->ask('Client Secret');
-		    $site_domain = $this->ask("Enter this site's domain name, including http(s)://");
-		    $this->done['GOOGLE_CLIENT_REDIRECT_URL'] = str_finish($site_domain, '/') . 'oauth/google/callback';
-			$this->mock_progress();
-		    
-		    
-		}
-		else $this->comment("Dropbox setup complete. Moving on...\n");
-		
-	}    
 
 
+// 2.    
+     private function create_archives_bucket(){
+	    if(!array_key_exists('VERSIONS_BUCKET', $this->done)){
+		    $this->comment("You need to create a bucket to be used for storing versions of your stories and archival copies of your work.");
+		    if(!$this->confirm("Would you like to continue with creating this bucket?")) return;
+		    $bucketname = $this->ask('What should your bucket be named?');
+		    $created = $this->s3client->createBucket([
+			    'Bucket' => $bucketname,
+		    ]);
+		    $this->mock_progress();
+		    if($created) $this->done['VERSIONS_BUCKET'] = $bucketname;
+		    else{
+			    $this->error('Something went wrong!');
+			    return;
+		    }
+		    
+	    }
+		else $this->comment("Archival Bucket setup complete. Moving on...\n");
+	    
+    }
+
+// 3.
     private function configure_db(){
 	    if(!array_key_exists('DB_USERNAME', $this->done)){
 	    
-		    $this->comment("Enter your database credentials next.");
+		    $this->comment("Enter your database credentials next. Your database should be created, and the user you specify should have permissions for this table. This step will save your credentials, then you will have the opportunity to create the necessary tables for the application.");
 		    $this->done['DB_HOST'] = $this->ask('MySQL Host');
+		    config(['database.connections.mysql.host' => $this->done['DB_HOST']]);
+		    
 		    $this->done['DB_DATABASE'] = $this->ask('MySQL Database Name');
+		    config(['database.connections.mysql.database' => $this->done['DB_DATABASE']]);
+		    
 		    $this->done['DB_USERNAME'] = $this->ask('MySQL User');
+		    config(['database.connections.mysql.username' => $this->done['DB_USERNAME']]);
+		    
 		    $this->done['DB_PASSWORD'] = $this->ask('MySQL Password');
+		    config(['database.connections.mysql.password' => $this->done['DB_PASSWORD']]);
+		    
 			$this->mock_progress();
 	    }
-	    else $this->comment("Database credentials have been entered. Moving on...\n");
+	    else {
+		    config(['database.connections.mysql.host' => $this->done['DB_HOST']]);
+		    config(['database.connections.mysql.database' => $this->done['DB_DATABASE']]);
+		    config(['database.connections.mysql.username' => $this->done['DB_USERNAME']]);
+		    config(['database.connections.mysql.password' => $this->done['DB_PASSWORD']]);
+		    $this->comment("Database credentials have been entered. Moving on...\n");
+	    }
 		    
     }
 
     
+// 4.    
     private function install_db(){
 	    
 	    if(!array_key_exists('DB_SETUP_COMPLETE', $this->done)){
 		    if ($this->confirm('You are now ready to set up the database. Do you wish to continue?')) {
 				$sql = file_get_contents(__DIR__.'/build.sql');
+				DB::connection()->reconnect();
+// 				dd(DB::connection());
 				$pdo = DB::connection()->getPdo();
 				$pdo->exec($sql);
 				
 				$brand = new Brand;
 				$brand->slug = 'def';
+				$brand->logo = '/vendor/pub/images/SpringfieldShopper.png';
 				$brand->name = 'Default';
 				$brand->handle = 'default';
 				$brand->save();
@@ -299,6 +293,45 @@ ooo        oooooo    ooooooo
 		else $this->comment("Database setup complete. Moving on...\n");
 		
     }
+   
+    
+// 5.      
+	private function setup_google(){
+	    if(!array_key_exists('GOOGLE_CLIENT_ID', $this->done)){
+		    $this->comment("(optional) You'll need to setup a Google API project via the developer console in order to use Google for login. Go to https://console.developers.google.com/apis/library to create one.");
+		    $this->comment("After the project is setup, you'll receive a 'Client ID' and 'Client Secret'. You'll also be asked to enter the site's domain name for use with redirects after the login prompt. \n Enter these next:");
+		    if(!$this->confirm("Would you like to continue with this step?")) return;
+		    $this->done['GOOGLE_CLIENT_ID'] = $this->ask('Client ID');
+		    $this->done['GOOGLE_CLIENT_SECRET'] = $this->ask('Client Secret');
+		    $site_domain = $this->ask("Enter this site's domain name, including http(s)://");
+		    $this->done['GOOGLE_CLIENT_REDIRECT_URL'] = str_finish($site_domain, '/') . 'oauth/google/callback';
+			$this->mock_progress();
+		    
+		    
+		}
+		else $this->comment("Dropbox setup complete. Moving on...\n");
+		
+	} 	
+	
+// 6.	
+	private function setup_dropbox(){
+	    if(!array_key_exists('DROPBOX_CLIENT_ID', $this->done)){
+		    $this->comment("(optional) You'll need to setup a Dropbox app via the developer console in order to use Dropbox as part of your print workflow. Go to https://www.dropbox.com/developers/apps to create one.");
+		    $this->comment("After the app is made, you will get an 'App Key', 'App Secret', and 'App Token'. \n Enter these next:");
+		    if(!$this->confirm("Would you like to continue with this step?")) return;
+		    $this->done['DROPBOX_CLIENT_ID'] = $this->ask('App key');
+		    $this->done['DROPBOX_APP_SECRET'] = $this->ask('App secret');
+		    $this->done['DROPBOX_ACCESS_TOKEN'] = $this->ask('Access Token');
+			$this->mock_progress();		    
+		    
+		}
+		else $this->comment("Dropbox setup complete. Moving on...\n");
+		
+	}    
+
+    
+   
+
     
 
     private function finish(){
@@ -335,7 +368,7 @@ ooo        oooooo    ooooooo
 	    $mapped = [];
 	    $table = [];
 	    foreach($this->done as $k => $v){
-		    if(!env($k))
+		    if(!env($k) || starts_with($k, 'DB_'))
 			    $mapped[] = "$k=$v";
 		    $table[] = [$k, $v];
 	    }
@@ -357,6 +390,9 @@ ooo        oooooo    ooooooo
 				$this->comment('The following values are now available:');
 				$this->table(['Key', 'Value'], $table);
 $this->comment("DONE!! Your configuration has been written and is available to Laravel.
+
+You should now run `php artisan vendor:publish` to copy the required assets from Pub into Laravel.
+
 Now you're on your way. This calls for a toast!! 🍻
 ");
 				

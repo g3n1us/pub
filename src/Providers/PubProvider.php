@@ -16,6 +16,7 @@ use View;
 use User;
 use Cache;
 use Illuminate\Http\Request;
+use DB;
 
 use Article;
 use File;
@@ -37,6 +38,13 @@ class PubProvider extends ServiceProvider
      */
     public function boot()
     {
+	    if ($this->app->runningInConsole()) {
+	        $this->commands([
+	            Install::class,
+	        ]);
+	    }	       	    
+
+       //  if(!config('pub.setup_complete')) return;
 
 	    $this->loadViewsFrom(dirname(__DIR__).'/resources/views', 'pub');
 	    
@@ -55,7 +63,15 @@ class PubProvider extends ServiceProvider
          if(config('pub.s3_bucket'))   
             config(['filesystems.disks.s3.bucket' => config('pub.s3_bucket')]);
 	        
-        View::share('brand', Brand::first());
+		try {
+		    DB::connection()->getPdo();
+		    
+	        View::share('brand', Brand::first());
+		    
+		} catch (\Exception $e) {
+
+		}	    	        
+	        
         
         
 		Relation::morphMap([
@@ -116,11 +132,6 @@ class PubProvider extends ServiceProvider
 	    ], 'views');	 
 	    
 	    
-	    if ($this->app->runningInConsole()) {
-	        $this->commands([
-	            Install::class,
-	        ]);
-	    }	       	    
 		    
     }
     
