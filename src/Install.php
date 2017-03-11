@@ -389,11 +389,17 @@ ooo        oooooo    ooooooo
 				
 				$this->comment('The following values are now available:');
 				$this->table(['Key', 'Value'], $table);
-$this->comment("DONE!! Your configuration has been written and is available to Laravel.
+$this->comment("😊 Your configuration has been written and is available to Laravel. There are just a couple more steps, and you are completely done.
 
-You should now run `php artisan vendor:publish` to copy the required assets from Pub into Laravel.
+• You should now run `php artisan vendor:publish` to copy the required assets from Pub into Laravel.
 
-Also, you can run `php artisan db:seed --class=PubDatabaseSeeder`. This will load the site with some placeholder content so you can get an idea of how things work.
+• Next, open the file: routes/web.php and comment out the declared route for the homepage:
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+• Optionally, you can run `php artisan db:seed --class=PubDatabaseSeeder`. This will load the site with some placeholder content so you can get an idea of how things work.
 
 Now you're on your way. This calls for a toast!! 🍻
 ");
