@@ -393,6 +393,8 @@ $this->comment("DONE!! Your configuration has been written and is available to L
 
 You should now run `php artisan vendor:publish` to copy the required assets from Pub into Laravel.
 
+Also, you can run `php artisan db:seed --class=PubDatabaseSeeder`. This will load the site with some placeholder content so you can get an idea of how things work.
+
 Now you're on your way. This calls for a toast!! 🍻
 ");
 				
