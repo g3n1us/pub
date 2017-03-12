@@ -8,14 +8,17 @@ https://laravel.com/docs/installation
 It is best to install Pub on top of a fresh Laravel installation. The Pub CLI installer will set up database connections, AWS resources, Google login and Dropbox integration.
 
 After Laravel is installed, setup the basic authentication scaffolding by running:
-```
+~~~~
 php artisan make auth
-```
+php artisan migrate
+~~~~
 
 
 Install via Composer:
 
 	composer require g3n1us/pub
+	
+> Note: you may have to include `"minimum-stability": "dev"` in your composer.json while Pub is still in development.
 
 After this you must add the Pub service providers array in `config/app.php`.
 
@@ -44,6 +47,7 @@ This will walk you through setup.
 After setup is complete, publish your assets from the Pub package to the site:
 
 	php artisan vendor:publish
+	composer dump autoload
 
 ### There are some other optional steps you can take:
 
