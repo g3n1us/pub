@@ -22,7 +22,7 @@ Route::group(['middleware' => ['web']], function () {
 	});		
 	
 	Route::get('test', function(){
-		ddd(new WordProcessor);
+		dd(new WordProcessor);
 		
 		// Storage::disk('dropbox')->put('sdfsdf.txt', 'sdfsdfsd.txt');
 	});
