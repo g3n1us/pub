@@ -2,50 +2,34 @@ CREATE TABLE `areas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page_id` int(11) DEFAULT NULL,
   `article_id` int(11) DEFAULT NULL,
-  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `layout` text COLLATE utf8_unicode_ci,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `config` text COLLATE utf8_unicode_ci,
+  `handle` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `layout` text,
+  `description` varchar(255) DEFAULT NULL,
+  `config` text,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
 CREATE TABLE `article_contents` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` bigint(20) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) DEFAULT NULL,
   `body` mediumtext,
-  `info_box` text NOT NULL,
-  `review_by` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `review_date` datetime NOT NULL,
-  `id2` bigint(20) NOT NULL,
-  `paper_section` varchar(32) NOT NULL,
-  `paper_page_no` varchar(10) NOT NULL DEFAULT '',
-  `paper_filename` varchar(255) NOT NULL DEFAULT '',
-  `paper_subsection` varchar(32) NOT NULL,
-  `feed_ordering` smallint(5) unsigned NOT NULL DEFAULT '9999',
-  `embed_video` text,
-  `poll` text,
-  `embed_video_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `bylineTitle` varchar(255) DEFAULT NULL,
-  `short_url` varchar(130) DEFAULT NULL,
-  `activation_datetime` datetime DEFAULT NULL,
-  `edition_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
 CREATE TABLE `articles` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `short_title` varchar(255) DEFAULT NULL,
-  `photo_id` bigint(20) unsigned DEFAULT NULL,
+  `photo_id` int(10) unsigned DEFAULT NULL,
   `summary` text NOT NULL,
   `author_display` varchar(255) DEFAULT NULL,
   `pub_date` timestamp NULL DEFAULT NULL,
@@ -53,7 +37,7 @@ CREATE TABLE `articles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `approved` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -61,40 +45,38 @@ CREATE TABLE `authorables` (
   `author_id` bigint(20) NOT NULL,
   `authorable_id` int(10) unsigned NOT NULL,
   `authorable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `metadata` text NOT NULL,
+  `metadata` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   KEY `authorables_authorables_id_authorables_type_index` (`authorable_id`,`authorable_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
 CREATE TABLE `authors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `firstname` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `department` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `title` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `email` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `twitter` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `phone` varchar(15) CHARACTER SET latin1 NOT NULL,
-  `grouping` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `blog` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `author_page` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `handle` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `department` varchar(100) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `twitter` varchar(100) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `grouping` varchar(100) DEFAULT NULL,
+  `blog` varchar(100) DEFAULT NULL,
+  `author_page` varchar(100) DEFAULT NULL,
+  `handle` varchar(100) DEFAULT NULL,
   `bio` longtext,
-  `mugshot` varchar(255) CHARACTER SET latin1 DEFAULT '',
-  `current` tinyint(1) NOT NULL,
-  `middlename` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `displayname` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `newsokID` int(11) DEFAULT NULL,
-  `facebook_page` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `mugshot` varchar(255) DEFAULT '',
+  `current` tinyint(1) DEFAULT 1,
+  `middlename` varchar(100) DEFAULT NULL,
+  `displayname` varchar(100) DEFAULT NULL,
+  `facebook_page` varchar(100) DEFAULT NULL,
   `google_plus_id` varchar(45) DEFAULT NULL,
   `home_phone` varchar(15) DEFAULT NULL,
   `cell_phone` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `NewsOKID` (`newsokID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -107,7 +89,7 @@ CREATE TABLE `block_types` (
   `handle` varchar(80) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `sort_order` tinyint(3) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -148,11 +130,11 @@ CREATE TABLE `blocks` (
   `text2` longtext CHARACTER SET utf8 DEFAULT NULL,
   `text3` longtext CHARACTER SET utf8 DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `config` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -177,11 +159,11 @@ CREATE TABLE `brands` (
   `css` text COLLATE utf8_unicode_ci,
   `landingcontent` text COLLATE utf8_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `nav_hide` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -191,11 +173,11 @@ CREATE TABLE `brands` (
 CREATE TABLE `editions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pub_date` date NOT NULL,
-  `metadata` text NOT NULL,
+  `metadata` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -206,11 +188,11 @@ CREATE TABLE `fileables` (
   `file_id` bigint(20) NOT NULL,
   `fileable_id` int(10) unsigned NOT NULL,
   `fileable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` text NOT NULL,
+  `metadata` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   KEY `fileables_fileable_id_fileable_type_index` (`fileable_id`,`fileable_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -220,16 +202,16 @@ CREATE TABLE `fileables` (
 CREATE TABLE `files` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `article_id` bigint(20) DEFAULT NULL,
-  `filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `bucket` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `mime_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `extension` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` json NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `bucket` varchar(255),
+  `mime_type` varchar(50) NOT NULL,
+  `extension` varchar(10) NOT NULL,
+  `metadata` json,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3127869 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3127869 DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -243,7 +225,7 @@ CREATE TABLE `forms` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -257,7 +239,7 @@ CREATE TABLE `page_aliases` (
   `page_id` int(11) unsigned NOT NULL,
   `alias` varchar(255) NOT NULL,
   UNIQUE KEY `page_id` (`page_id`,`alias`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -270,11 +252,11 @@ CREATE TABLE `pages` (
   `name` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
   `controller` varchar(50) NOT NULL DEFAULT 'page_controller',
-  `config` json NOT NULL,
+  `config` json,
   `template` varchar(255) DEFAULT 'page_default',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=909 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -284,27 +266,27 @@ CREATE TABLE `pages` (
 # Dump of table pg_page_metadatas
 # ------------------------------------------------------------
 
-CREATE TABLE `pg_page_metadatas` (
-  `site_sid` varchar(32) NOT NULL,
-  `page_sid` varchar(32) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `keywords` varchar(255) NOT NULL,
-  `page_name` varchar(32) NOT NULL,
-  `section` varchar(32) NOT NULL,
-  `subsection` varchar(32) NOT NULL,
-  `content_type` varchar(32) NOT NULL,
-  `content_title` varchar(255) NOT NULL,
-  `view_choice` varchar(32) NOT NULL,
-  `priority` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `robot_type` varchar(32) NOT NULL,
-  `taxonomy_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `cstm_sctn_list` varchar(32) DEFAULT NULL,
-  `content_lang` varchar(10) DEFAULT NULL,
-  `facebook_url` varchar(255) DEFAULT '',
-  `twitter_handle` varchar(255) DEFAULT '',
-  UNIQUE KEY `site_sid` (`site_sid`,`page_sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+# CREATE TABLE `pg_page_metadatas` (
+#   `site_sid` varchar(32) NOT NULL,
+#   `page_sid` varchar(32) NOT NULL,
+#   `title` varchar(255) NOT NULL,
+#   `description` varchar(255) NOT NULL,
+#   `keywords` varchar(255) NOT NULL,
+#   `page_name` varchar(32) NOT NULL,
+#   `section` varchar(32) NOT NULL,
+#   `subsection` varchar(32) NOT NULL,
+#   `content_type` varchar(32) NOT NULL,
+#   `content_title` varchar(255) NOT NULL,
+#   `view_choice` varchar(32) NOT NULL,
+#   `priority` tinyint(3) unsigned NOT NULL DEFAULT '1',
+#   `robot_type` varchar(32) NOT NULL,
+#   `taxonomy_id` int(10) unsigned NOT NULL DEFAULT '0',
+#   `cstm_sctn_list` varchar(32) DEFAULT NULL,
+#   `content_lang` varchar(10) DEFAULT NULL,
+#   `facebook_url` varchar(255) DEFAULT '',
+#   `twitter_handle` varchar(255) DEFAULT '',
+#   UNIQUE KEY `site_sid` (`site_sid`,`page_sid`)
+# ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
@@ -323,11 +305,11 @@ CREATE TABLE `social_accounts` (
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nickname` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `metadata` json NOT NULL,
+  `metadata` json,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -341,7 +323,7 @@ CREATE TABLE `standalone_blocks` (
   `handle` varchar(100) NOT NULL,
   `block_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -356,7 +338,7 @@ CREATE TABLE `svgs` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -367,11 +349,11 @@ CREATE TABLE `taggables` (
   `tag_id` bigint(20) NOT NULL,
   `taggable_id` int(10) unsigned NOT NULL,
   `taggable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` json NOT NULL,
+  `metadata` json,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   KEY `taggables_taggable_id_taggable_type_index` (`taggable_id`,`taggable_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -382,12 +364,12 @@ CREATE TABLE `tags` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `metadata` json NOT NULL,
+  `metadata` json,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_handle` (`handle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -401,7 +383,7 @@ CREATE TABLE `user_groups` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -420,7 +402,7 @@ CREATE TABLE `workflows` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `notes` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 
 # Dump of table users
 # ------------------------------------------------------------

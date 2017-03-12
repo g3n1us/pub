@@ -39,6 +39,7 @@ $factory->define(Article::class, function (Faker\Generator $faker) {
 // 	$photo_id = File::limit(50)->pluck('id')->random();
     return [
         'title' => $title,
+        'slug' => str_slug($title),
         'short_title' => str_limit($title, 50),
         'summary' => $faker->realText(300),
 //         'author_display' => 'Sean Bethel',
