@@ -1,13 +1,11 @@
 <?php
 namespace G3n1us\Pub\Controllers\Auth;	
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Auth\RegisterController as BaseRegisterController;
+
 	
-class RegisterController extends Controller{
-	
-    use RegistersUsers;
-    
+class RegisterController extends BaseRegisterController{
+	    
     /**
      * Show the application registration form.
      *

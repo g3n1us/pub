@@ -3,6 +3,7 @@
 namespace G3n1us\Pub\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /*
 use SocialAccount;
@@ -11,6 +12,7 @@ use UserGroup;
 
 class User extends Authenticatable
 {
+	use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
