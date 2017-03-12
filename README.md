@@ -56,9 +56,13 @@ Seed the site with placeholder content:
 	php artisan db:seed --class=PubDatabaseSeeder
 	
 If you'd like to send mail out of the box, you'll need to either set up an smtp and add it's credentials to the .env file. Or you can change
+
 	MAIL_DRIVER=smtp
+	
 to 
+
 	MAIL_DRIVER=sendmail
+	
 to send email using the built in sendmail executable.
 
 > Note: Don't use this for production! You should use a dedicated mail option. Check out `config/mail.php` to set this and other mail related options.
