@@ -400,7 +400,7 @@ CREATE TABLE `workflows` (
   `status` varchar(100) NOT NULL DEFAULT 'draft',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `notes` text NOT NULL,
+  `notes` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE=utf8mb4_unicode_ci;
 

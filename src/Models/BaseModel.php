@@ -10,11 +10,16 @@ class BaseModel extends Model
 {
 	protected $keystoforget = [];
 	
+	public $forgettable_keys = [];
+	
     public function flush_cache(){
 	    foreach($this->keystoforget as $keytoforget) {
 // 		    if($keytoforget == 'article_')
-		    Cache::forget(cache_key($keytoforget, $this, false));
-		    Cache::forget(cache_key($keytoforget, $this, false) . '_auth');
+			$cachekeys = cache_key($keytoforget, $this, false);
+			foreach($cachekeys as $cachekey){
+				Cache::forget($cachekey);
+				Cache::forget($cachekey . '_auth');	
+			}
 	    }
     }
     

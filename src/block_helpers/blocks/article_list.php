@@ -4,18 +4,28 @@ return [
 			'editbuttons' => function($block){
 				return editbuttons($block);
 			},
-			'default_content' => ['field1' => 'News', 'field2' => 5, 'field3' => 0],
+			'default_content' => ['field1' => '', 'field2' => 5, 'field3' => 0],
 			'resolve_content' => function($block){
 
 				$tag = rawurlencode($block->field1);
 				$limit = $block->field2 ?: 5;
 				$show_pagination = $block->field3;
-			    $foundtag = Tag::where('handle', $tag)->orWhere('name', $tag)->first();
-			    if(!$foundtag) $articles = [];
-			    else if($show_pagination)
-					$articles = $foundtag->articles()->paginate($limit);
-				else 
-					$articles = $foundtag->articles()->limit($limit)->get();
+				if(empty($tag)){
+				    if($show_pagination)
+						$articles = Article::paginate($limit);
+					else 
+						$articles = Article::limit($limit)->get();
+				}
+				else
+				{
+				    $foundtag = Tag::where('handle', $tag)->orWhere('name', $tag)->first();
+				    if(!$foundtag) $articles = [];
+				    else if($show_pagination)
+						$articles = $foundtag->articles()->paginate($limit);
+					else 
+						$articles = $foundtag->articles()->limit($limit)->get();
+					
+				}
 			    $data['articles'] = $articles;
 // 				dd((string) view('pub::parts.raw_article_list', $data));
 				return view('pub::parts.raw_article_list', $data)->__toString();

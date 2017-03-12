@@ -4,6 +4,7 @@ namespace G3n1us\Pub\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use G3n1us\Pub\Providers\PubProvider;
 
 /*
 use SocialAccount;
@@ -21,6 +22,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'username',
     ];
+    
+    protected $events = [
+        'creating' => PubProvider::class,
+    ];    
 
     /**
      * The attributes excluded from the model's JSON form.

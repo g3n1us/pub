@@ -147,7 +147,7 @@ class ArticleController extends BaseController
 		    $content->save();
 
 
-		if($request->workflow){
+		if($request->workflow && is_numeric($request->workflow['assigned_user'])){
 			if(!$article->workflow)
 				$article->workflow()->create([]);
 			
@@ -188,14 +188,13 @@ class ArticleController extends BaseController
 	    $article->title = $request->title;
 	    $article->short_title = $request->short_title ?: $request->title;
 	    $article->subtitle = $request->subtitle;
-	    $article->slug = $request->slug;
+	    $article->slug = $request->input('slug', str_slug($article->title));
 
 	    $article->pub_date = strtotime($request->pub_date);
 	    $article->author_display = $request->author_display;
 	    $article->approved = $request->approved;
 	    $article->save();
 	    $article->flush_cache();
-
 		if($request->isXmlHttpRequest()) return $article;
 	    else return redirect($article->url);
     }

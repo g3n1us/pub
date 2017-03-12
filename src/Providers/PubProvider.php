@@ -98,6 +98,14 @@ class PubProvider extends ServiceProvider
 			}
 		});
 		
+		User::saving(function($user){
+			dd($user);
+			if(User::count() == 0){
+				$user->groups()->save(new UserGroup(['group' => 'admin']));
+			}
+
+		});
+		
         Article::saved(function ($article) {
 	        if(config('filesystems.disks.s3.bucket')){
 		        $article->load('tags', 'photo', 'files', 'content', 'authors'); 

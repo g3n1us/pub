@@ -103,7 +103,7 @@ class PubRouteProvider extends ServiceProvider
 				return $article;
 			}
 			else{
-				return Cache::remember(cache_key('article_', $value), 999, function() use($value){
+				return Cache::remember(cache_key('article_', $value)[0], 999, function() use($value){
 					if(auth()->check())
 						$article =  is_numeric($value) ? Article::withoutGlobalScopes(['is_approved'])->find($value) : Article::withoutGlobalScopes(['is_approved'])->where('slug', $value)->first(); 					
 					else

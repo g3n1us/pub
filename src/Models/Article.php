@@ -24,6 +24,10 @@ class Article extends BaseModel
 		'article_lead_photo_' => 'article_lead_photo_',
 		'article_versions_' => 'article_versions_',
 	];
+	
+	public $forgettable_keys = [
+		'slug'
+	];
     // protected $hidden = ['created_at', 'updated_at', 'pub_date'];
         
     protected $appends = ['lead_photo', 'url', 'link', 'body', 'author_from_displayname', 'legacy_sections', 'status', 'relative_date'];

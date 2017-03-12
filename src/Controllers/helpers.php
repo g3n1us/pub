@@ -289,18 +289,35 @@ if(!function_exists('user_id_string')){
 		return !$user ?: $user->id;		
 	}
 }
+
+
 // 'article_'.$value.''.auth()->check()
 if(!function_exists('cache_key')){
 	function cache_key($prefix, $model_or_id, $authcheck = null){
+// 		dd($model_or_id);
 		if(is_string($model_or_id) || is_integer($model_or_id))
 			$id = $model_or_id;
 		else{
-			$id = $model_or_id->getKey();
+			if(!empty($model_or_id->forgettable_keys)){
+				$id = [];
+				$id[] = $model_or_id->getKey();
+				foreach($model_or_id->forgettable_keys as $fk){
+					$id[] = $model_or_id->{$fk};
+				}
+			}
+			else
+				$id = $model_or_id->getKey();
 // 			dd($model_or_id->getKey());
 		}
 		$authcheck = is_null($authcheck) ? auth()->check() : $authcheck;
 		$authstring = $authcheck ? '_auth' : '';
-		return "$prefix$id$authstring";
+		if(is_array($id)){
+			return array_map(function($k) use($prefix, $authstring){
+				return "$prefix$k$authstring";
+			}, $id);
+		}
+		else
+			return ["$prefix$id$authstring"];
 	}
 }
 
