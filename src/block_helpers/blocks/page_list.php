@@ -11,7 +11,7 @@ return
 		$pages = Page::limit($limit)->get();
 // 				dd($pages->first());
 		$data = ['pages' => $pages];
-		return view('parts.raw_page_list', $data)->__toString();
+		return view('pub::parts.raw_page_list', $data)->__toString();
 	},
 	'edit_form' => function($block){
 		return '<form id="modal_editor_form" method="post" data-editoraction="EDITOR--save_button" data-bid=' . $block->id . '><label for="text1">Pages to Show</label><input id="text1" class="form-control" name="model[text1]" value="' . $block->text1 . '"></form><div class="mt-2 text-right"><button type="submit" class="hide formsubmitter btn btn-primary btn-lg">Save</button></div>';

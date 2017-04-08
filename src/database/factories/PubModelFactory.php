@@ -36,14 +36,11 @@ $factory->define(G3n1us\Pub\Models\User::class, function (Faker\Generator $faker
 $factory->define(Article::class, function (Faker\Generator $faker) {
     static $password;
 	$title = $faker->realText(50);
-// 	$photo_id = File::limit(50)->pluck('id')->random();
     return [
         'title' => $title,
         'slug' => str_slug($title),
         'short_title' => str_limit($title, 50),
         'summary' => $faker->realText(300),
-//         'author_display' => 'Sean Bethel',
-//         'photo_id' => $photo_id,
         'pub_date' => \Carbon\Carbon::now(),
         'approved' => 1,
     ];
