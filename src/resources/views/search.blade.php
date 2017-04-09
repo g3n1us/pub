@@ -11,11 +11,11 @@ search_page
 <article class="m-b-6 Xarticle">
 	<div class="container">
 		<div class="row">	
-			<div class="col-xl-6 col-xl-offset-2 col-md-7">		
+			<div class="col-xl-9 col-md-7">		
 				<h1 class="display-4 m-b-1">Search</h1>
                 <form action="/search" class="form-inline">
 	                <div class="form-troup">
-	                <input type="search" autofocus class="form-control" name="q">
+	                <input type="search" autofocus class="form-control" value="{{array_get($_GET, 'q')}}" name="q">
 	                <button type="submit" class="btn btn-primary">Search</button>
 	                </div>
                 </form>

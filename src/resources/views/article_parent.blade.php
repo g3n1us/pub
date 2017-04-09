@@ -35,7 +35,7 @@
 					
 					<nav class="article-social my-2">
 						<b class="text-primary">Share this article: </b>
-						<a class="btn btn-circle btn-primary" href="https://twitter.com/intent/tweet?text={{$article->title}}&via=dcexaminer&url={{$article->url}}"><i class="fa fa-twitter"></i></a> 
+						<a class="btn btn-circle btn-primary" href="https://twitter.com/intent/tweet?text={{$article->title}}&via={{config('pub.twitter_handle')}}&url={{$article->url}}"><i class="fa fa-twitter"></i></a> 
 						<a class="btn btn-circle btn-primary ml-quarter js-window" data-window_size="700x400" href="https://www.facebook.com/sharer.php?u={{$article->url}}"><i class="fa fa-facebook"></i></a> 
 						<a class="btn btn-circle btn-primary ml-quarter js-window" href="mailto:?subject=Read+This!+{{rawurlencode($article->title)}}&body={{rawurlencode(strip_tags($article->summary))}}%0D%0A%0D%0A{{rawurlencode(str_limit(str_replace("\n", "\n\n",strip_tags($article->body)), 900))}}%0D%0A%0D%0A%0D%0A Continue Reading at: {{$article->url}}"><i class="fa fa-envelope"></i></a> 
 					</nav>
@@ -43,7 +43,7 @@
 				</section>
 				<aside class="m-t-2">
 					@foreach($article->tags as $tag)
-					<a class="badge XXbtn-sm badge-default" style="margin-bottom: .5rem" href="/tag/{{$tag->name}}">{{$tag->name}}</a>
+					<a class="badge badge-default" style="margin-bottom: .5rem" href="/tag/{{$tag->name}}">{{$tag->name}}</a>
 					@endforeach
 				</aside>
 			</div>

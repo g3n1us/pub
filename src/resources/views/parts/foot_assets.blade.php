@@ -23,8 +23,6 @@
 	</script>	
 	
 	<script src="/vendor/pub/js/includes/leprechaun.js"></script>	
-	<script type="text/javascript" src="https://g3n1us-components.s3.amazonaws.com/SiteComponent.js"></script>
-	<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
 	<script type="text/javascript" src="/vendor/pub/js/includes/Caret.js-master/dist/jquery.caret.min.js"></script>
 	<script type="text/javascript" src="/vendor/pub/js/includes/At.js-master/dist/js/jquery.atwho.min.js"></script>
 	
@@ -172,7 +170,7 @@ if(typeof usernames !== "undefined"){
 			'234x60'
 		];
 		
-		$('.mdc--ad').each(function(){
+		$('.pub--ad').each(function(){
 			var size = $(this).data('size') || '728x90';
 			var wh = size.split('x');			
 			var targetwidth = $(this).parent().width();

@@ -8,7 +8,7 @@
 
 
 
-<article class="m-b-6 Xarticle">
+<article class="mb-6">
 	<div class="container">
 		<div class="row">	
 			<div class="col-xl-9 col-md-7">		
