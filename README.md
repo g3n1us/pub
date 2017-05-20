@@ -1,5 +1,5 @@
 # Pub :beer:
-An opiniated, Laravel based CMS for publications with deep AWS integration, installable via Composer Edit
+An opiniated, Laravel based CMS for publications with deep AWS integration, installable via Composer
 
 ## Getting Started
 The best way to get started using Pub is by setting up a dedicated EC2 instance. An instance profile should be set up with administrator priveleges. This way, the installer can set up an S3 bucket and other AWS resources for use with the application. After setup is complete, the extra priveleges that are not needed of the profile should be removed. 
