@@ -263,36 +263,6 @@ CREATE TABLE `pages` (
 
 
 
-# Dump of table pg_page_metadatas
-# ------------------------------------------------------------
-
-# CREATE TABLE `pg_page_metadatas` (
-#   `site_sid` varchar(32) NOT NULL,
-#   `page_sid` varchar(32) NOT NULL,
-#   `title` varchar(255) NOT NULL,
-#   `description` varchar(255) NOT NULL,
-#   `keywords` varchar(255) NOT NULL,
-#   `page_name` varchar(32) NOT NULL,
-#   `section` varchar(32) NOT NULL,
-#   `subsection` varchar(32) NOT NULL,
-#   `content_type` varchar(32) NOT NULL,
-#   `content_title` varchar(255) NOT NULL,
-#   `view_choice` varchar(32) NOT NULL,
-#   `priority` tinyint(3) unsigned NOT NULL DEFAULT '1',
-#   `robot_type` varchar(32) NOT NULL,
-#   `taxonomy_id` int(10) unsigned NOT NULL DEFAULT '0',
-#   `cstm_sctn_list` varchar(32) DEFAULT NULL,
-#   `content_lang` varchar(10) DEFAULT NULL,
-#   `facebook_url` varchar(255) DEFAULT '',
-#   `twitter_handle` varchar(255) DEFAULT '',
-#   UNIQUE KEY `site_sid` (`site_sid`,`page_sid`)
-# ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-
-
-
-
 # Dump of table social_accounts
 # ------------------------------------------------------------
 
