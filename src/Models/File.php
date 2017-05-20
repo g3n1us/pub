@@ -37,10 +37,10 @@ class File extends BaseModel
 	    $return = [];
 	    $return['dir'] = 'originals';
 	    $return['full_filename'] = null;
-	    if($file->bucket == 'image.washingtonexaminer.biz') {
+	    if($file->bucket == 'xxxxxxxxxxx') {
 		    $split = explode('/', $file->filename);
 		    $hash = rtrim($split[count($split) - 1], '.jpg');
-		    $return['full_filename'] = "http://cdn.washingtonexaminer.biz/cache/1060x600-$hash.jpg";
+		    $return['full_filename'] = "http://xxxxxxxxxxx-$hash.jpg";
 	    }
 	    $return['filename'] = str_replace('originals/', '', $filename);	    	    
 	    if(ends_with($return['filename'], '.pdf')) $return['full_filename'] = Storage::disk(config('pub.filesystem'))->url("placeholders/pdf.svg");	    
