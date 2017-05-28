@@ -13,7 +13,7 @@ It is best to install Pub on top of a fresh Laravel installation. The Pub CLI in
 
 After Laravel is installed, setup the basic authentication scaffolding by running:
 ~~~~
-php artisan make auth
+php artisan make:auth
 php artisan migrate
 ~~~~
 
