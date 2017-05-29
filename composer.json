@@ -15,6 +15,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "michelf/php-markdown": "^1.6",
         "laravel/socialite": "^3.0",
+        "laravel/scout": "^3.0",	    
         "phpoffice/phpword": "v0.13.*"    
         
     },
