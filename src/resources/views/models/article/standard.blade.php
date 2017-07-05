@@ -12,7 +12,7 @@
 			    srcset="{{object_get($article->lead_photo, 'thumb')}}">
 			  <img 
 			    src="{{object_get($article->lead_photo, 'url')}}" 
-			    alt="{{object_get($article->lead_photo, 'url')}}">
+			    alt="{{object_get($article->lead_photo, 'url')}}" class="img-fluid">
 			</picture>
 			
 		</a>

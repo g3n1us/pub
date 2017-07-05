@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
 		var article; // do this a better way. This is just to avoid errors for Vue.js
-		window.iframelyapikey = '{{env('IFRAMELY_API_KEY')}}';
+		window.iframelyapikey = '{{config("pub.iframely_key")}}';
 	</script>
 	<style>
 		body{

@@ -4,12 +4,6 @@
 		
 		<a href="/"><img src="{{$brand->logo}}" style="max-height: 25px; background-color: white;" alt="SpringfieldShopper"></a>
 		
-		@verbatim
-		<script type="text/template" id="header_article_list">
-			{{#each this}} <a style="color:#fff" href="{{url}}" class="mr-1"><small class="text-danger">{{relative_date}}</small> {{str_limit short_title 40}}</a> {{/each}}
-		</script>
-		@endverbatim
-		<div class="mr-auto ml-3 hidden-sm-down" data-handlebars_template="header_article_list" data-sourceurl="/ajax/articles?limit=2&paginate=0"></div>
 		<div class="">
 			<a style="text-decoration: none;" href="/search"><i class="fa fa-search text-muted fa-lg ml-2"></i> </a>
 			<a><i class="fa fa-youtube text-muted fa-lg ml-2"></i></a>
@@ -36,10 +30,12 @@
 			<div class="col-md-12">
 				<div class="text-center">
 					<a href="/">
-						<img src="{{$brand->logo}}" alt="SpringfieldShopper" alt="SpringfieldShopper">
+						<img src="{{$brand->logo}}" alt="SpringfieldShopper" alt="SpringfieldShopper" style="max-width: 420px">
 					</a>
 				</div>
-				<date class="text-muted nav-item" style=" line-height: 2; min-width: 170px;"><small>{{ \Carbon\Carbon::now()->toDayDateTimeString() }}</small></date>
+				<date class="text-muted nav-item" style=" line-height: 2; min-width: 170px;"><small>
+					<a class="text-muted" tabindex="0" href="/by-date/{{ \Carbon\Carbon::now()->toAtomString() }}" data-date="{{\Carbon\Carbon::now()->toAtomString()}}">{{ \Carbon\Carbon::now()->toDayDateTimeString() }}</a>				
+				  </small></date>
 
 				<nav class="mainnav navbar navbar-light navbar-toggleable-md mb-3 justify-content-between">
 					<button class="navbar-toggler navbar-toggler-right ml-auto" type="button" data-toggle="collapse" data-target="#main-nav-items" aria-controls="main-nav-items" aria-expanded="false" aria-label="Toggle navigation" style="border:none; position: relative; right: initial;"><span class="navbar-toggler-icon"></span></button>

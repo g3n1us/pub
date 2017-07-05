@@ -27,14 +27,10 @@ use UserGroup;
 
 use G3n1us\Pub\Install;
 
-// define('BRAND_SLUG', 'wex');	
-// define('BRAND_HANDLE', 'wex');	
-
 class PubProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
-     * To install, run `php -r "require('vendor/autoload.php'); new \G3n1us\Pub\Install;"` from the  project's base directory
      * @return void
      */
     public function boot()
@@ -46,12 +42,15 @@ class PubProvider extends ServiceProvider
 	    }	       	    
 
        //  if(!config('pub.setup_complete')) return;
-	    $theme = env('THEME');
+	    $theme = config('pub.theme');
 	    if($theme)
     	    $this->loadViewsFrom(resource_path("/views/$theme"), 'pub');
 
-	    $this->loadViewsFrom(dirname(__DIR__).'/resources/views', 'pub');
+	    $this->loadViewsFrom(dirname(__DIR__).'/resources/views/vendor/pub/default_theme', 'pub');
 	    
+	    $this->loadViewsFrom(dirname(__DIR__).'/resources/views', 'pub');
+
+
 	    if(config('pub.users_model'))
 	        config(['auth.providers.users.model' => config('pub.users_model')]);
 	        
@@ -64,8 +63,12 @@ class PubProvider extends ServiceProvider
             config(['services.google' => config('pub.google_auth')]);
          
 
-         if(config('pub.s3_bucket'))   
+        if(config('pub.s3_bucket'))   
             config(['filesystems.disks.s3.bucket' => config('pub.s3_bucket')]);
+
+        if(config('pub.versions_bucket'))
+	        config(['filesystems.disks.versions_bucket' => array_merge(config('filesystems.disks.s3'), ['bucket' => config('pub.versions_bucket')])]);
+
 	        
 		try {
 		    DB::connection()->getPdo();
@@ -85,6 +88,7 @@ class PubProvider extends ServiceProvider
 		    'file' => File::class,
 		]); 
 		
+
 		
 		Article::saving(function($article, $article2 = null){
 			$new_assigned_user_id = (int)request()->input('workflow.assigned_user');
@@ -94,7 +98,7 @@ class PubProvider extends ServiceProvider
 				$new_assigned_user = User::find($new_assigned_user_id);
 				// a user assignmnet has changed - send email here!
 				$Name = "Pub Site Admin"; //senders name 
-				$email = "noreply@development.jmbdc.com"; //senders e-mail adress 
+				$email = "noreply@example.com"; //senders e-mail adress 
 				$recipient = $new_assigned_user->email; //recipient 
 				$mail_body = 'You have been assigned a task. Go to '. url('/article/'.$article->id.'/edit'); //mail body 
 				$subject = "Workflow Assignment"; //subject 
@@ -104,6 +108,7 @@ class PubProvider extends ServiceProvider
 			}
 		});
 		
+		
 		User::saved(function($user){
 			if(User::count() == 1){
 				$user->groups()->save(new UserGroup(['group' => 'admin']));
@@ -111,10 +116,11 @@ class PubProvider extends ServiceProvider
 
 		});
 		
+		
         Article::saved(function ($article) {
-	        if(config('filesystems.disks.s3.bucket')){
+	        if(config('filesystems.disks.versions_bucket.bucket')){
 		        $article->load('tags', 'photo', 'files', 'content', 'authors'); 
-				Storage::disk('s3')->put('page_versions/'.$article->id, serialize($article));		        
+				Storage::disk('versions_bucket')->put('page_versions/'.$article->id, serialize($article));		        
 	        }
 // 			clear caches
 			$article->flush_cache();
@@ -142,11 +148,11 @@ class PubProvider extends ServiceProvider
 	    
 		// Rethink this with regard to how themes are made
 	    $this->publishes([
-	        dirname(__DIR__).'/resources/views/default_theme' => resource_path('views/vendor/pub/default_theme'),
+	        dirname(__DIR__).'/resources/views/default_theme' => resource_path('views/vendor/pub'),
 	    ], 'views');	 
 	    
 	    
-		    
+
     }
     
     

@@ -10,6 +10,10 @@ return [
 	
 	's3_bucket' => env('S3_BUCKET'),
 	
+	'iframely_key'  => env('IFRAMELY_API_KEY'),
+	
+	'theme'         => env('THEME'),
+	
 	'google_auth' => [
 		'client_id' => env('GOOGLE_CLIENT_ID'),
 		'client_secret' => env('GOOGLE_CLIENT_SECRET'),

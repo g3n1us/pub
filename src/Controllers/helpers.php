@@ -344,6 +344,7 @@ if(!function_exists('editbuttons')){
 	}		
 }
 	
+	
 if(!function_exists('block_config')){
 	function block_config($type, $prop = null){
 		$block_types = [
@@ -369,5 +370,11 @@ if(!function_exists('block_config')){
 			return array_get($block_types[$type], $prop, array_get($block_types, "default.$prop"));	
 		else	
 			return $block_types[$type];
+	}
+}
+
+if(!function_exists('brand')){
+	function brand(){
+		return Brand::first();
 	}
 }

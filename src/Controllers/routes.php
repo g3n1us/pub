@@ -22,7 +22,9 @@ Route::group(['middleware' => ['web']], function () {
 	});		
 	
 	Route::get('test', function(){
-		dd(new WordProcessor);
+		
+		//dd(brand());
+// 		dd(new WordProcessor);
 		
 		// Storage::disk('dropbox')->put('sdfsdf.txt', 'sdfsdfsd.txt');
 	});
@@ -42,9 +44,10 @@ Route::group(['middleware' => ['web']], function () {
 	
 // 	Route::get('dashboard/cklist/{tab?}', 'DashboardController@getPageList');
 	
-	// Route::get('/', 'PublicController@index');
+//  Route::get('/', 'PublicController@index');
 	
 // 	Route::get('author/{author?}', 'PublicController@showAuthor');
+
 	Route::resource('author', 'AuthorController');	
 	
 	Route::get('search/{term?}', 'PublicController@showSearch');
@@ -81,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
 		$o["url"] = $article->url;
 		$o["author_name"] = $author->displayname;
 		$o["author_url"] = '/author/'.$o["author_name"];
-		$o["provider_name"] = "Washington Examiner";
+		$o["provider_name"] = "";
 		$o["provider_url"] = url('');
 		$o['html'] = '<div>Hello World</div>';
 		
@@ -176,8 +179,9 @@ Route::group(['middleware' => ['web']], function () {
 			    'version' => 'latest',
 			    'region'  => 'us-east-1'
 			]);
+
 			$versions = $client->ListObjectVersions([
-				'Bucket' => 'mediadc-file-uploads',
+				'Bucket' => config('pub.versions_bucket'),
 				'Prefix' => "page_versions/$article_id"
 			]);
 			$versions = collect($versions['Versions'])->transform(function($v, $i) use($client, $article_id){
@@ -188,7 +192,7 @@ Route::group(['middleware' => ['web']], function () {
 				$newv->put('date_diff', $newv['LastModified']->diffForHumans());
 				
 				$version = $client->getObject([
-					'Bucket' => 'mediadc-file-uploads',
+					'Bucket' => config('pub.versions_bucket'),
 					'Key' => "page_versions/$article_id",
 					'VersionId' => $newv['VersionId'],
 				]);
@@ -209,7 +213,6 @@ Route::group(['middleware' => ['web']], function () {
 				
 				return $newv;
 			});
-// 			dd($versions);
 			return $versions;
 		});		
 	});

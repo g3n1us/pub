@@ -1,12 +1,11 @@
 <?php
 namespace G3n1us\Pub\Providers;
 	
-// namespace G3n1us\Pub\Providers;
-
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Routing\RoutingServiceProvider as ServiceProvider;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+// use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Providers\RouteServiceProvider as ServiceProvider;
 // use Route;
 use Cache;
 use Config;
@@ -87,6 +86,8 @@ class PubRouteProvider extends ServiceProvider
 			else abort(404);
 		});   
 		
+		
+		
 		$handleArticleOrSlug = function ($value, $route){
 			$article_version = $this->app->request->input('article_version');
 			if($article_version){
@@ -119,18 +120,27 @@ class PubRouteProvider extends ServiceProvider
 		Route::bind('article', $handleArticleOrSlug);
 		Route::bind('slug', $handleArticleOrSlug);	
 		
-       parent::boot();
+		
+		
+		parent::boot();
+		
+// 	    $this->loadRoutesFrom(dirname(__DIR__) . '/Controllers/routes.php');
 		    
     }
 
+
+
     public function map(){
+	    
         Route::group([
             'middleware' => 'web',
             'namespace' => $this->namespace,
         ], function ($router) {
             require dirname(__DIR__) . '/Controllers/routes.php';
-        });	    
+        });	 
+        
+	    parent::map();
+           
     }
-
 
 }
