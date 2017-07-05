@@ -1,3 +1,7 @@
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700" rel="stylesheet">
+<link rel="stylesheet" href="/vendor/pub/editor/css/pub-editor.min.css">
+
+
 <style>
 	.editor-bootstrap .edit_article_button, .editor-bootstrap .article_edit .edit_article_button, .article_edit .editor-bootstrap .edit_mode_button, .article_edit .editor-bootstrap .settings_button{
 		display: none;
@@ -68,7 +72,7 @@
 
 
 <div class="uploadcover dz-outercontainer"><span>Drop to Upload</span></div>
-<div id="dz-previews" class="dz-outercontainer not-filled dropzone"></div>
+<div id="dz-previews" class="dz-outercontainer not-filled XXXdropzone"></div>
 
 
 <!-- the multi-modal -->
@@ -124,7 +128,7 @@
 	var _token = '{{csrf_token()}}';
 	var csrf='{{csrf_token()}}';	
 	var projectPath = '';
-	window.CKEDITOR_BASEPATH = '/vendor/pub/dist/js/ckeditor/';
+	window.CKEDITOR_BASEPATH = '/vendor/pub/editor/js/ckeditor/';
 	var item;
 	var sbitem; 
 	var btn; 
@@ -135,9 +139,11 @@
 	console.log(article_id);
 </script>
 
-<script src="/vendor/pub/dist/js/private-compiled.js" data-ace-base="/vendor/pub/dist/js/ace/src-min-noconflict" type="text/javascript" charset="utf-8"></script>
-<script>
-	Dropzone.autoDiscover = false;
-</script>
-<script src="/vendor/pub/js/logic.js"></script>
-<script src="/vendor/pub/js/includes/handlers.js"></script>
+@if(auth()->check())
+@include('pub::handlebars_templates.private')
+	<script>
+		var usernames = {!! G3n1us\Pub\Models\User::pluck('username') !!};
+	</script>
+
+@endif
+<script src="/vendor/pub/editor/js/pub-editor.js" data-ace-base="/vendor/pub/js/ace/src-min-noconflict" type="text/javascript" charset="utf-8"></script>

@@ -1,0 +1,39 @@
+{
+  "name": "public_html",
+  "version": "0.0.0",
+  "description": "",
+  "main": "cdsad.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "ace-builds": "^1.2.6",
+    "dropzone": "^4.3.0",
+    "emmet": "^1.6.3",
+    "es6-promise": "~3.1.2",
+    "font-awesome": "^4.7.0",
+    "gulp": "~3.9.1",
+    "gulp-autoprefixer": "~3.1.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-copy": "^1.0.0",
+    "gulp-cssnano": "~2.1.2",
+    "gulp-minify": "0.0.10",
+    "gulp-sass": "~2.3.1",
+    "gulp-sourcemaps": "~2.0.0-alpha",
+    "handlebars": "^4.0.6",
+    "jquery-smooth-scroll": "^2.1.2",
+    "minify": "~2.0.8",
+    "mousetrap": "^1.6.1",
+    "sortablejs": "^1.5.1"
+  },
+  "devDependencies": {
+    "gulp-awspublish": "^3.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "0.0.10",
+    "gulp-uglify": "^2.0.0",
+    "laravel-elixir": "^6.0.0-11",
+    "video.js": "^5.12.6"
+  }
+}

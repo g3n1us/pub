@@ -1,0 +1,776 @@
+
+/*Sticky Footer*/
+
+* { margin:0; padding:0; } 
+
+html, body, #wrap, #fullcontent { height: 100%; }
+
+body > #wrap, body > #fullcontent > #wrap {height: auto; min-height: 100%;}
+
+#main { padding-bottom: 100px; }  /* This offsets the footer and adds a mandatory 50px pad to the bottom */
+
+#footer { 
+    position: relative;
+	margin-top: -50px; /* negative value of footer height */
+	height: auto; /* this is set via javascript */
+	clear:both;
+} 
+		
+#footer li {
+	padding: 10px 15px 10px;
+}
+/* CLEAR FIX*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+/*End of Sticky Footer*/
+
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+/* Except for carousel controls! */
+.carousel-control {-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;}
+
+
+/* PRESENTATIONAL CLASSES */
+.unspan {
+	float: none;
+	margin-left: 0;
+} /* This resets the span properties in bootstrap except for width. Use it when you only want to specify a dynamic width using these classes. */
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: relative; 
+}
+
+.margin10under, .margin-bottom10 {
+	margin-bottom: 10px;
+}
+
+.margin20under, .margin-bottom20 {
+	margin-bottom: 20px;
+}
+
+.margin-top0{margin-top: 0px}	
+	.margin-top5{margin-top: 5px}	
+	.margin-top10{margin-top: 10px}	
+	.margin-top15{margin-top: 15px}	
+	.margin-top20{margin-top: 20px}	
+	.margin-top25{margin-top: 25px}	
+	.margin-top30{margin-top: 30px}	
+	.margin-top35{margin-top: 35px}	
+	.margin-top40{margin-top: 40px}	
+	.margin-top45{margin-top: 45px}	
+	.margin-top50{margin-top: 50px}	
+	.margin-top55{margin-top: 55px}	
+	.margin-top60{margin-top: 60px}	
+	.margin-top65{margin-top: 65px}	
+	.margin-top70{margin-top: 70px}	
+	.margin-top75{margin-top: 75px}	
+	.margin-top80{margin-top: 80px}	
+	.margin-top85{margin-top: 85px}	
+	.margin-top90{margin-top: 90px}	
+	.margin-top95{margin-top: 95px}	
+	.margin-top100{margin-top: 100px}	
+	.margin-top105{margin-top: 105px}	
+	.margin-top110{margin-top: 110px}	
+	.margin-top115{margin-top: 115px}	
+	.margin-top120{margin-top: 120px}	
+	.margin-top125{margin-top: 125px}	
+	.margin-top130{margin-top: 130px}	
+	.margin-top135{margin-top: 135px}	
+	.margin-top140{margin-top: 140px}	
+	.margin-top145{margin-top: 145px}	
+	.margin-top150{margin-top: 150px}	
+	.margin-top155{margin-top: 155px}	
+	.margin-top160{margin-top: 160px}	
+	.margin-top165{margin-top: 165px}	
+	.margin-top170{margin-top: 170px}	
+	.margin-top175{margin-top: 175px}	
+	.margin-top180{margin-top: 180px}	
+	.margin-top185{margin-top: 185px}	
+	.margin-top190{margin-top: 190px}	
+	.margin-top195{margin-top: 195px}	
+	.margin-top200{margin-top: 200px}	
+	.margin-top205{margin-top: 205px}	
+	.margin-top210{margin-top: 210px}	
+	.margin-top215{margin-top: 215px}	
+	.margin-top220{margin-top: 220px}	
+	.margin-top225{margin-top: 225px}	
+	.margin-top230{margin-top: 230px}	
+	.margin-top235{margin-top: 235px}	
+	.margin-top240{margin-top: 240px}	
+	.margin-top245{margin-top: 245px}	
+	.margin-top250{margin-top: 250px}	
+	.margin-top255{margin-top: 255px}	
+	.margin-top260{margin-top: 260px}	
+	.margin-top265{margin-top: 265px}	
+	.margin-top270{margin-top: 270px}	
+	.margin-top275{margin-top: 275px}	
+	.margin-top280{margin-top: 280px}	
+	.margin-top285{margin-top: 285px}	
+	.margin-top290{margin-top: 290px}	
+	.margin-top295{margin-top: 295px}	
+	.margin-top300{margin-top: 300px}	
+	.margin-top305{margin-top: 305px}	
+	.margin-top310{margin-top: 310px}	
+	.margin-top315{margin-top: 315px}	
+	.margin-top320{margin-top: 320px}	
+	.margin-top325{margin-top: 325px}	
+	.margin-top330{margin-top: 330px}	
+	.margin-top335{margin-top: 335px}	
+	.margin-top340{margin-top: 340px}	
+	.margin-top345{margin-top: 345px}	
+	.margin-top350{margin-top: 350px}	
+	.margin-top355{margin-top: 355px}	
+	.margin-top360{margin-top: 360px}	
+	.margin-top365{margin-top: 365px}	
+	.margin-top370{margin-top: 370px}	
+	.margin-top375{margin-top: 375px}	
+	.margin-top380{margin-top: 380px}	
+	.margin-top385{margin-top: 385px}	
+	.margin-top390{margin-top: 390px}	
+	.margin-top395{margin-top: 395px}	
+	.margin-top400{margin-top: 400px}	
+	.margin-top405{margin-top: 405px}	
+	.margin-top410{margin-top: 410px}	
+	.margin-top415{margin-top: 415px}	
+	.margin-top420{margin-top: 420px}	
+	.margin-top425{margin-top: 425px}	
+	.margin-top430{margin-top: 430px}	
+	.margin-top435{margin-top: 435px}	
+	.margin-top440{margin-top: 440px}	
+	.margin-top445{margin-top: 445px}	
+	.margin-top450{margin-top: 450px}	
+	.margin-top455{margin-top: 455px}	
+	.margin-top460{margin-top: 460px}	
+	.margin-top465{margin-top: 465px}	
+	.margin-top470{margin-top: 470px}	
+	.margin-top475{margin-top: 475px}	
+	.margin-top480{margin-top: 480px}	
+	.margin-top485{margin-top: 485px}	
+	.margin-top490{margin-top: 490px}	
+	.margin-top495{margin-top: 495px}	
+	.margin-top500{margin-top: 500px}	
+	
+.margin-bottom0{margin-bottom: 0px}	
+	.margin-bottom5{margin-bottom: 5px}	
+	.margin-bottom10{margin-bottom: 10px}	
+	.margin-bottom15{margin-bottom: 15px}	
+	.margin-bottom20{margin-bottom: 20px}	
+	.margin-bottom25{margin-bottom: 25px}	
+	.margin-bottom30{margin-bottom: 30px}	
+	.margin-bottom35{margin-bottom: 35px}	
+	.margin-bottom40{margin-bottom: 40px}	
+	.margin-bottom45{margin-bottom: 45px}	
+	.margin-bottom50{margin-bottom: 50px}	
+	.margin-bottom55{margin-bottom: 55px}	
+	.margin-bottom60{margin-bottom: 60px}	
+	.margin-bottom65{margin-bottom: 65px}	
+	.margin-bottom70{margin-bottom: 70px}	
+	.margin-bottom75{margin-bottom: 75px}	
+	.margin-bottom80{margin-bottom: 80px}	
+	.margin-bottom85{margin-bottom: 85px}	
+	.margin-bottom90{margin-bottom: 90px}	
+	.margin-bottom95{margin-bottom: 95px}	
+	.margin-bottom100{margin-bottom: 100px}	
+	.margin-bottom105{margin-bottom: 105px}	
+	.margin-bottom110{margin-bottom: 110px}	
+	.margin-bottom115{margin-bottom: 115px}	
+	.margin-bottom120{margin-bottom: 120px}	
+	.margin-bottom125{margin-bottom: 125px}	
+	.margin-bottom130{margin-bottom: 130px}	
+	.margin-bottom135{margin-bottom: 135px}	
+	.margin-bottom140{margin-bottom: 140px}	
+	.margin-bottom145{margin-bottom: 145px}	
+	.margin-bottom150{margin-bottom: 150px}	
+	.margin-bottom155{margin-bottom: 155px}	
+	.margin-bottom160{margin-bottom: 160px}	
+	.margin-bottom165{margin-bottom: 165px}	
+	.margin-bottom170{margin-bottom: 170px}	
+	.margin-bottom175{margin-bottom: 175px}	
+	.margin-bottom180{margin-bottom: 180px}	
+	.margin-bottom185{margin-bottom: 185px}	
+	.margin-bottom190{margin-bottom: 190px}	
+	.margin-bottom195{margin-bottom: 195px}	
+	.margin-bottom200{margin-bottom: 200px}	
+	.margin-bottom205{margin-bottom: 205px}	
+	.margin-bottom210{margin-bottom: 210px}	
+	.margin-bottom215{margin-bottom: 215px}	
+	.margin-bottom220{margin-bottom: 220px}	
+	.margin-bottom225{margin-bottom: 225px}	
+	.margin-bottom230{margin-bottom: 230px}	
+	.margin-bottom235{margin-bottom: 235px}	
+	.margin-bottom240{margin-bottom: 240px}	
+	.margin-bottom245{margin-bottom: 245px}	
+	.margin-bottom250{margin-bottom: 250px}	
+	.margin-bottom255{margin-bottom: 255px}	
+	.margin-bottom260{margin-bottom: 260px}	
+	.margin-bottom265{margin-bottom: 265px}	
+	.margin-bottom270{margin-bottom: 270px}	
+	.margin-bottom275{margin-bottom: 275px}	
+	.margin-bottom280{margin-bottom: 280px}	
+	.margin-bottom285{margin-bottom: 285px}	
+	.margin-bottom290{margin-bottom: 290px}	
+	.margin-bottom295{margin-bottom: 295px}	
+	.margin-bottom300{margin-bottom: 300px}	
+	.margin-bottom305{margin-bottom: 305px}	
+	.margin-bottom310{margin-bottom: 310px}	
+	.margin-bottom315{margin-bottom: 315px}	
+	.margin-bottom320{margin-bottom: 320px}	
+	.margin-bottom325{margin-bottom: 325px}	
+	.margin-bottom330{margin-bottom: 330px}	
+	.margin-bottom335{margin-bottom: 335px}	
+	.margin-bottom340{margin-bottom: 340px}	
+	.margin-bottom345{margin-bottom: 345px}	
+	.margin-bottom350{margin-bottom: 350px}	
+	.margin-bottom355{margin-bottom: 355px}	
+	.margin-bottom360{margin-bottom: 360px}	
+	.margin-bottom365{margin-bottom: 365px}	
+	.margin-bottom370{margin-bottom: 370px}	
+	.margin-bottom375{margin-bottom: 375px}	
+	.margin-bottom380{margin-bottom: 380px}	
+	.margin-bottom385{margin-bottom: 385px}	
+	.margin-bottom390{margin-bottom: 390px}	
+	.margin-bottom395{margin-bottom: 395px}	
+	.margin-bottom400{margin-bottom: 400px}	
+	.margin-bottom405{margin-bottom: 405px}	
+	.margin-bottom410{margin-bottom: 410px}	
+	.margin-bottom415{margin-bottom: 415px}	
+	.margin-bottom420{margin-bottom: 420px}	
+	.margin-bottom425{margin-bottom: 425px}	
+	.margin-bottom430{margin-bottom: 430px}	
+	.margin-bottom435{margin-bottom: 435px}	
+	.margin-bottom440{margin-bottom: 440px}	
+	.margin-bottom445{margin-bottom: 445px}	
+	.margin-bottom450{margin-bottom: 450px}	
+	.margin-bottom455{margin-bottom: 455px}	
+	.margin-bottom460{margin-bottom: 460px}	
+	.margin-bottom465{margin-bottom: 465px}	
+	.margin-bottom470{margin-bottom: 470px}	
+	.margin-bottom475{margin-bottom: 475px}	
+	.margin-bottom480{margin-bottom: 480px}	
+	.margin-bottom485{margin-bottom: 485px}	
+	.margin-bottom490{margin-bottom: 490px}	
+	.margin-bottom495{margin-bottom: 495px}	
+	.margin-bottom500{margin-bottom: 500px}	
+	
+.margin-top-neg0{margin-top: -0px}	
+	.margin-top-neg5{margin-top: -5px}	
+	.margin-top-neg10{margin-top: -10px}	
+	.margin-top-neg15{margin-top: -15px}	
+	.margin-top-neg20{margin-top: -20px}	
+	.margin-top-neg25{margin-top: -25px}	
+	.margin-top-neg30{margin-top: -30px}	
+	.margin-top-neg35{margin-top: -35px}	
+	.margin-top-neg40{margin-top: -40px}	
+	.margin-top-neg45{margin-top: -45px}	
+	.margin-top-neg50{margin-top: -50px}	
+	.margin-top-neg55{margin-top: -55px}	
+	.margin-top-neg60{margin-top: -60px}	
+	.margin-top-neg65{margin-top: -65px}	
+	.margin-top-neg70{margin-top: -70px}	
+	.margin-top-neg75{margin-top: -75px}	
+	.margin-top-neg80{margin-top: -80px}	
+	.margin-top-neg85{margin-top: -85px}	
+	.margin-top-neg90{margin-top: -90px}	
+	.margin-top-neg95{margin-top: -95px}	
+	.margin-top-neg100{margin-top: -100px}	
+	.margin-top-neg105{margin-top: -105px}	
+	.margin-top-neg110{margin-top: -110px}	
+	.margin-top-neg115{margin-top: -115px}	
+	.margin-top-neg120{margin-top: -120px}	
+	.margin-top-neg125{margin-top: -125px}	
+	.margin-top-neg130{margin-top: -130px}	
+	.margin-top-neg135{margin-top: -135px}	
+	.margin-top-neg140{margin-top: -140px}	
+	.margin-top-neg145{margin-top: -145px}	
+	.margin-top-neg150{margin-top: -150px}	
+	.margin-top-neg155{margin-top: -155px}	
+	.margin-top-neg160{margin-top: -160px}	
+	.margin-top-neg165{margin-top: -165px}	
+	.margin-top-neg170{margin-top: -170px}	
+	.margin-top-neg175{margin-top: -175px}	
+	.margin-top-neg180{margin-top: -180px}	
+	.margin-top-neg185{margin-top: -185px}	
+	.margin-top-neg190{margin-top: -190px}	
+	.margin-top-neg195{margin-top: -195px}	
+	.margin-top-neg200{margin-top: -200px}	
+	.margin-top-neg205{margin-top: -205px}	
+	.margin-top-neg210{margin-top: -210px}	
+	.margin-top-neg215{margin-top: -215px}	
+	.margin-top-neg220{margin-top: -220px}	
+	.margin-top-neg225{margin-top: -225px}	
+	.margin-top-neg230{margin-top: -230px}	
+	.margin-top-neg235{margin-top: -235px}	
+	.margin-top-neg240{margin-top: -240px}	
+	.margin-top-neg245{margin-top: -245px}	
+	.margin-top-neg250{margin-top: -250px}	
+	.margin-top-neg255{margin-top: -255px}	
+	.margin-top-neg260{margin-top: -260px}	
+	.margin-top-neg265{margin-top: -265px}	
+	.margin-top-neg270{margin-top: -270px}	
+	.margin-top-neg275{margin-top: -275px}	
+	.margin-top-neg280{margin-top: -280px}	
+	.margin-top-neg285{margin-top: -285px}	
+	.margin-top-neg290{margin-top: -290px}	
+	.margin-top-neg295{margin-top: -295px}	
+	.margin-top-neg300{margin-top: -300px}	
+	.margin-top-neg305{margin-top: -305px}	
+	.margin-top-neg310{margin-top: -310px}	
+	.margin-top-neg315{margin-top: -315px}	
+	.margin-top-neg320{margin-top: -320px}	
+	.margin-top-neg325{margin-top: -325px}	
+	.margin-top-neg330{margin-top: -330px}	
+	.margin-top-neg335{margin-top: -335px}	
+	.margin-top-neg340{margin-top: -340px}	
+	.margin-top-neg345{margin-top: -345px}	
+	.margin-top-neg350{margin-top: -350px}	
+	.margin-top-neg355{margin-top: -355px}	
+	.margin-top-neg360{margin-top: -360px}	
+	.margin-top-neg365{margin-top: -365px}	
+	.margin-top-neg370{margin-top: -370px}	
+	.margin-top-neg375{margin-top: -375px}	
+	.margin-top-neg380{margin-top: -380px}	
+	.margin-top-neg385{margin-top: -385px}	
+	.margin-top-neg390{margin-top: -390px}	
+	.margin-top-neg395{margin-top: -395px}	
+	.margin-top-neg400{margin-top: -400px}	
+	.margin-top-neg405{margin-top: -405px}	
+	.margin-top-neg410{margin-top: -410px}	
+	.margin-top-neg415{margin-top: -415px}	
+	.margin-top-neg420{margin-top: -420px}	
+	.margin-top-neg425{margin-top: -425px}	
+	.margin-top-neg430{margin-top: -430px}	
+	.margin-top-neg435{margin-top: -435px}	
+	.margin-top-neg440{margin-top: -440px}	
+	.margin-top-neg445{margin-top: -445px}	
+	.margin-top-neg450{margin-top: -450px}	
+	.margin-top-neg455{margin-top: -455px}	
+	.margin-top-neg460{margin-top: -460px}	
+	.margin-top-neg465{margin-top: -465px}	
+	.margin-top-neg470{margin-top: -470px}	
+	.margin-top-neg475{margin-top: -475px}	
+	.margin-top-neg480{margin-top: -480px}	
+	.margin-top-neg485{margin-top: -485px}	
+	.margin-top-neg490{margin-top: -490px}	
+	.margin-top-neg495{margin-top: -495px}	
+	.margin-top-neg500{margin-top: -500px}	
+	
+
+
+.padded10 {
+	padding: 10px;
+}
+
+.padded0_10 {
+	padding: 0 10px;
+}
+
+.padded10_0 {
+	padding: 10px 0px;
+}
+
+.padded20 {
+	padding: 20px;
+}
+
+.padded20_0 {
+	padding: 20px 0;
+}
+
+.padded0_20 {
+	padding: 0 20px;
+}
+
+.padded0_30 {
+	padding:0 30px;
+}
+
+.padded30 {
+	padding: 30px;
+}
+
+.padded30_0 {
+	padding: 30px 0;
+}
+
+.padded40 {
+	padding: 40px;
+}
+
+.padded40_0 {
+	padding: 40px 0;
+}
+
+.padded0_40 {
+	padding:0 40px;
+}
+
+.padded50 {
+	padding: 50px;
+}
+
+.padded50_0 {
+	padding: 50px 0;
+}
+
+.padded0_50 {
+	padding:0 50px;
+}
+
+.spread-shadow, .spread_shadow {
+	-webkit-box-shadow: 0px 0px 20px black;
+	-moz-box-shadow: 0px 0px 20px black;
+	-o-box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px black;
+}
+
+
+/* Force anchors to show cursor:pointer */
+ a {cursor: pointer; }
+ 
+ 
+/*  Clean up style and add hover functionality to Bootstrap dropdowns  */
+
+
+ul.nav li.dropdown > ul.dropdown-menu{
+	-webkit-transition: all 1s linear;
+	-moz-transition: all 1s linear;
+	transition: all 1s linear;
+}
+
+/*
+ul.nav li.dropdown:hover > ul.dropdown-menu{
+    display: block !important;    
+}
+*/
+
+/* Bootstrap Hacks and Tweaks */
+	/* Fix ckeditor p-wrapping addition within carousels */
+.carousel .item > p{margin: 0}
+
+/*  Add back default responsive images - same as .img-responsive */
+img{
+	max-width: 100%;
+	height: auto;
+	display: inline-block;
+}
+
+/* End BS Hacks etc. */
+
+ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
+
+.nav .dropdown-toggle .caret { display:none; }
+
+.dropdown-menu {margin: 0}
+
+.navbar .nav > li > .dropdown-menu:before, .navbar .nav > li > .dropdown-menu:after  {display: none}
+
+/* For animated poof effect function in jmb_custom.js; empty element #puff must be on page */
+#puff {
+    cursor:pointer;
+    display:none;
+    position:absolute;
+    height:32px;
+    width:32px;
+    background: url(images/poofcloud.png) no-repeat;
+    z-index: 999999;
+}
+
+/* iOS style toggles for input checkbox */
+
+.uiswitch {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  width: 51px;
+  height: 31px;
+  position: relative;
+  border-radius: 16px;
+  cursor: pointer;
+  outline: 0;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #e5e5e5;
+  -webkit-transition-duration: 600ms;
+  -moz-transition-duration: 600ms;
+  transition-duration: 600ms;
+  -webkit-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+.uiswitch::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 47px;
+  height: 27px;
+  content: ' ';
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  z-index: 1;
+  -webkit-transition-duration: 300ms;
+  -moz-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+.uiswitch::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 27px;
+  height: 27px;
+  content: ' ';
+  position: absolute;
+  border-radius: 27px;
+  background: #ffffff;
+  z-index: 2;
+  top: 2px;
+  left: 2px;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.25), 0px 4px 11px 0px rgba(0, 0, 0, 0.08), -1px 3px 3px 0px rgba(0, 0, 0, 0.14);
+  -webkit-transition: transform 300ms, width 280ms;
+  -moz-transition: transform 300ms, width 280ms;
+  transition: transform 300ms, width 280ms;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition-timing-function: cubic-bezier(0.42, 0.8, 0.58, 1.2);
+  -moz-transition-timing-function: cubic-bezier(0.42, 0.8, 0.58, 1.2);
+  transition-timing-function: cubic-bezier(0.42, 0.8, 0.58, 1.2);
+}
+.uiswitch:checked {
+  background-color: #4CD964;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4CD964), color-stop(100%, #4dd865));
+  background-image: -webkit-linear-gradient(-90deg, #4CD964 0%, #4dd865 100%);
+  background-image: linear-gradient(-180deg,#4CD964 0%, #4dd865 100%);
+}
+.uiswitch:checked::after {
+  -webkit-transform: translate3d(16px, 0, 0);
+  -moz-transform: translate3d(16px, 0, 0);
+  -ms-transform: translate3d(16px, 0, 0);
+  -o-transform: translate3d(16px, 0, 0);
+  transform: translate3d(16px, 0, 0);
+  right: 18px;
+  left: inherit;
+}
+.uiswitch:active::after {
+  width: 35px;
+}
+.uiswitch:checked::before, .uiswitch:active::before {
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.uiswitch:disabled {
+  opacity: 0.5;
+  cursor: default;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+.uiswitch:disabled:active::before, .uiswitch:disabled:active::after, .uiswitch:disabled:checked:active::before, .uiswitch:disabled:checked::before {
+  width: 27px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+.uiswitch:disabled:active::before {
+  width: 41px;
+  height: 27px;
+  -webkit-transform: translate3d(6px, 0, 0);
+  -moz-transform: translate3d(6px, 0, 0);
+  -ms-transform: translate3d(6px, 0, 0);
+  -o-transform: translate3d(6px, 0, 0);
+  transform: translate3d(6px, 0, 0);
+}
+.uiswitch:disabled:checked:active::before {
+  width: 27px;
+  height: 27px;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+
+.uiswitch {
+  background-color: #e5e5e5;
+}
+.uiswitch::before {
+  background-color: #ffffff;
+}
+.uiswitch::after {
+  background: #ffffff;
+}
+.uiswitch:checked {
+  background-color: #4CD964;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4CD964), color-stop(100%, #4dd865));
+  background-image: -webkit-linear-gradient(-90deg, #4CD964 0%, #4dd865 100%);
+  background-image: linear-gradient(-180deg,#4CD964 0%, #4dd865 100%);
+}
+
+
+/* Back to Top link CSS */
+.backtotop {
+	position: fixed;
+	bottom: 50%;
+	right: 5px;
+	background: rgba(0, 0, 0, 0) -webkit-linear-gradient(rgba(255, 255, 255, 0.6) 0%, #FFF 70.2%, rgba(255, 255, 255, 0.51) 100%);
+	background: transparent -moz-linear-gradient(rgba(255,255,255,0.6) 0%, #ffffff 70.2%, rgba(255,255,255,0.51) 100%);
+	background: transparent -o-linear-gradient(rgba(255,255,255,0.6) 0%, #ffffff 70.2%, rgba(255,255,255,0.51) 100%);
+	background: transparent -ms-linear-gradient(rgba(255,255,255,0.6) 0%, #ffffff 70.2%, rgba(255,255,255,0.51) 100%);
+	background: rgba(0, 0, 0, 0) linear-gradient(rgba(255, 255, 255, 0.6) 0%, #FFF 70.2%, rgba(255, 255, 255, 0.51) 100%);
+	border-radius: 5px 5px;
+	box-shadow: inset 0px 0px 5px #7B7B7B;
+	text-decoration: none;
+	font-size: 40px;
+	display: none;
+	-webkit-transition: all 200ms cubic-bezier(0.250, 1, 0.850, 1);
+	-webkit-transition: all 200ms cubic-bezier(0.250, 1.650, 0.850, 1.005);
+	-moz-transition: all 200ms cubic-bezier(0.250, 1.650, 0.850, 1.005);
+	-ms-transition: all 200ms cubic-bezier(0.250, 1.650, 0.850, 1.005);
+	-o-transition: all 200ms cubic-bezier(0.250, 1.650, 0.850, 1.005);
+	transition: all 200ms cubic-bezier(0.250, 1.650, 0.850, 1.005);
+	opacity: .3;
+	height: 40px;
+	line-height: 50px;
+	text-decoration: none;
+}
+
+.backtotop:hover {
+	box-shadow: inset 0px 0px 1px #7B7B7B;
+	text-decoration: none;
+	opacity: 1;
+}
+
+/*! Absolute centering vertical and horizontal. Caveat: parent must be relative
+!important .absolute-center elements get css size added via js in jmb_custom.js based on innerHeight. Add class .no-autosize */
+.center-container {
+  position: relative;
+}
+
+.absolute-center {
+/*
+	width: 50%;
+	height: 50%;
+*/
+	margin: auto;
+	position: absolute;
+	overflow: auto;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.absolute-center.is-left {
+  right: auto; left: 20px;
+  text-align: left;
+}
+
+.absolute-center.is-right {
+  left: auto; right: 20px;
+  text-align: right;
+}
+
+.absolute-center.is-image {
+  height: auto;
+}
+
+.absolute-center.is-image img { 
+  width: 100%;
+  height: auto;
+}
+
+.absolute-center.is-responsive {
+	width: 60%;
+	height: 60%;
+	min-width: 200px;
+	max-width: 400px;
+	padding: 40px;
+}
+
+/* CSS to go along with jmb_custom.js functions */
+
+.jmb_slider{
+	display: none; /* This fades in the slider after js completes */
+}
+
+.in_edit_mode .jmb_slider, .edit_mode .jmb_slider{
+	display: block; /* This fades in the slider after js completes */
+}
+
+
+/* Scroll-tape Responsive Nav
+	- apply this to a nav-tabs or nav-pills. Makes it scrollable sideways.	
+*/
+.scrolltape {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.scrolltape.forced{
+	-webkit-box-shadow: inset 7px 0px 10px -7px #000000, inset -7px 0px 10px -7px #000000;
+	box-shadow: inset 7px 0px 10px -7px #000000, inset -7px 0px 10px -7px #000000;
+}
+
+.scrolltape > li{
+	float: none;
+	display: table-cell;
+	vertical-align: bottom;
+	width: 1%;
+}
+
+@media(max-width: 768px){
+	.scrolltape{
+		-webkit-box-shadow: inset 7px 0px 10px -7px #000000, inset -7px 0px 10px -7px #000000;
+		box-shadow: inset 7px 0px 10px -7px #000000, inset -7px 0px 10px -7px #000000;
+	}
+}
+
+
+/* DEFAULT BOOTSTRAP 2 RESPONSIVE BREAKPOINTS */
+
+@media (min-width: 1200px) {
+	
+}
+
+@media (max-width: 767px) {
+	[class*="margin-top-neg"] {
+		margin-top: 0px;
+	}
+}
+
+@media (max-width: 480px) {
+	body {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
+

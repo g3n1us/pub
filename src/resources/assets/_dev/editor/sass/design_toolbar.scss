@@ -1,0 +1,236 @@
+/* 
+
+This stylesheet contains only system styles. This is not called when not either editing and logged in when viewing a project or when within a start or login view
+
+*/
+
+#usersettings input, #usersettings select, #usersettings textarea, #usersettings label, #usersettings td, #usersettings th{
+	color: black !important;
+} 
+
+[data-output]{
+	min-height: 40px;
+	outline: 1px dotted orange;
+}
+[data-output]:before{
+	content: "~** Template **~";
+	display: block;
+	text-align: center;
+	color: orange;
+}
+
+[data-output]:after{
+	content: attr(data-output);
+	display: block;
+	text-align: center;
+	color: orange;
+}
+
+[data-toggle]{
+	cursor: pointer;
+}
+
+.slidepanel {
+	position: fixed;
+	min-height: 200px;
+	max-height: calc(100% - 45px);
+	top: 45px;
+	right: 0px;
+	width: 20px;
+	padding: 10px;
+	transition: all .05s ease-in-out;
+	background-color: white;
+	z-index: 999;
+	box-shadow: 0px 0px 2px #b4afaf;
+	overflow: auto;
+	opacity: .3;
+}
+
+.slidepanel.left {
+	left: 0px;
+}
+
+.slidepanel.open {
+	width: 300px;
+	right: 0px;
+	box-shadow: 0px 0px 10px black;
+	opacity: 1;
+}
+
+
+.slidepanel .btn-group, .slidepanel .btn-block, .slidepanel .input-group, .slidepanel #settings-accordion .panel-body input.form-control{
+	/* margin-bottom: 10px */
+}
+
+.keyLink {
+	-webkit-appearance: button;
+	display: block;
+}
+
+.slidepanel h4, .slidepanel h5, .slidepanel h6 {
+	color: #33b5e5;
+}
+
+/*  widgets  */
+
+.editclick {
+	position: absolute;
+	z-index: 999
+}
+
+
+.editorwindowbuttons > a{
+	width: 80px;
+}
+.slidepanelcontent, .save_box{
+	display: none; 
+	margin-left: 20px;
+	-webkit-transition: all .2s ease-in-out;
+	height: 200px;
+	overflow: hidden;
+
+}
+
+/* ckeditor styles */
+
+.slidepanel.left .slidepanelcontent {
+	margin-left: 0;
+	margin-right: 20px;
+}
+
+.slidepanel.open .slidepanelcontent, .slidepanel.open .save_box {
+	display: block;
+	height: auto;
+	overflow: auto;
+
+}
+
+.slidepaneledge {
+	width: 20px;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(127,127,127,0);
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+	opacity: .2;
+	transition: all .1s linear;
+	
+}
+
+.slidepaneledge.left {
+	left: auto;
+	right: 0px;
+}
+
+
+.slidepaneledge .ridge {
+	width: 1px;
+	height: -webkit-calc(100% - 20px);
+	height: -moz-calc(100% - 20px);
+	height: calc(100% - 20px);
+	position: absolute;
+	background-color: transparent;
+	border-right: solid 1px black;
+	margin-top: 10px;
+	margin-left:6px;
+}
+
+.slidepaneledge.bottom .ridge{
+	width: calc(100% - 20px);
+	height: 1px;
+	margin-left: 10px !important;
+	margin-bottom: 1px;
+	position: relative;
+	border-bottom: solid 1px #000;
+	margin-top: 0;
+}
+
+.drag { position: relative; }
+
+.slidepaneledge .ridge:nth-child(2){
+	margin-left:6px;
+}
+
+.slidepaneledge .ridge:nth-child(3){
+	margin-left:8px;
+}
+
+.slidepaneledge .ridge:nth-child(4){
+	margin-left:10px;
+}
+
+.slidepaneledge .ridge:nth-child(5){
+	margin-left:12px;
+}
+
+.slidepaneledge .ridge:nth-child(6){
+	margin-left:14px;
+}
+
+.slidepaneledge .ridge:nth-child(7){
+	margin-left:16px;
+}
+
+.slidepaneledge .ridge:nth-child(8){
+	margin-left:4px;
+}
+
+.slidepaneledge:hover {
+	opacity: 1;
+	background-color: rgba(127,127,127,1);
+}
+
+.slidepaneledge:hover .ridge{
+	
+}
+
+.readout {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 0px 10px;
+}
+
+.editing {
+	// outline: dashed 2px rgba(0,128,0,0.23);
+	 
+}
+
+.editor-out-of-focus{
+	opacity: .2;
+}
+/*
+.editing:before{
+	content: ">";
+	font-size: 50px;
+	position: absolute;
+	margin: auto 0 auto -60px;
+	text-shadow: #008000 -2px 3px 4px;
+	line-height: 50px;
+}
+*/
+.editing.editing-hover {
+	outline: dashed 2px green;
+	 
+}
+
+.editing-hover{
+	outline: dashed 2px yellow;
+}
+
+
+.stopedit {
+	display: none;
+}
+
+#icons img {
+	margin: 10px 20px;
+	cursor: pointer;
+}
+
+#textures li {
+	margin: 10px 0px;
+	cursor: pointer;
+}
+

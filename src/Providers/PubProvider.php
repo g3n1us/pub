@@ -23,6 +23,7 @@ use File;
 use Storage;
 use Workflow;
 use Brand;
+use UserGroup;
 
 use G3n1us\Pub\Install;
 
@@ -45,6 +46,9 @@ class PubProvider extends ServiceProvider
 	    }	       	    
 
        //  if(!config('pub.setup_complete')) return;
+	    $theme = env('THEME');
+	    if($theme)
+    	    $this->loadViewsFrom(resource_path("/views/$theme"), 'pub');
 
 	    $this->loadViewsFrom(dirname(__DIR__).'/resources/views', 'pub');
 	    
@@ -67,6 +71,8 @@ class PubProvider extends ServiceProvider
 		    DB::connection()->getPdo();
 		    
 	        View::share('brand', Brand::first());
+
+	        View::share('theme', $theme);
 		    
 		} catch (\Exception $e) {
 
@@ -98,9 +104,8 @@ class PubProvider extends ServiceProvider
 			}
 		});
 		
-		User::saving(function($user){
-			dd($user);
-			if(User::count() == 0){
+		User::saved(function($user){
+			if(User::count() == 1){
 				$user->groups()->save(new UserGroup(['group' => 'admin']));
 			}
 
@@ -131,12 +136,13 @@ class PubProvider extends ServiceProvider
 		    	    
 	    
 	    $this->publishes([
-	        dirname(__DIR__).'/resources/assets' => public_path('vendor/pub'),
+	        dirname(__DIR__).'/resources/assets/dist' => public_path('vendor/pub'),
 	    ], 'public');
 	    
 	    
+		// Rethink this with regard to how themes are made
 	    $this->publishes([
-	        dirname(__DIR__).'/resources/views' => resource_path('views/vendor/pub'),
+	        dirname(__DIR__).'/resources/views/default_theme' => resource_path('views/vendor/pub/default_theme'),
 	    ], 'views');	 
 	    
 	    

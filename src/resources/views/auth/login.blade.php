@@ -2,12 +2,11 @@
 
 
 @section('head')
-	<link rel="stylesheet" href="/vendor/pub/dist/css/both-compiled.min.css">
-	<link rel="stylesheet" href="/vendor/pub/dist/css/private-compiled.min.css">
+	<link rel="stylesheet" href="/vendor/pub/editor/css/pub-editor.min.css">
 	<style>
 
 		body{
-		    background-image: url(/vendor/pub/images/login_bg.jpg);
+		    background-image: url(/vendor/pub/editor/images/login_bg.jpg);
 		    background-size: cover;
 		}
 	</style>

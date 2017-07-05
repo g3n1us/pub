@@ -11,7 +11,7 @@
 
 @show
 </head>
-<body class="{{ auth()->check() ? 'logged_in' : '' }} @section('bodyclasses') @show @stack('body_html_classes')">
+<body class="{{ auth()->check() ? 'logged_in' : '' }} @section('bodyclasses') @show @stack('body_html_classes')" style="padding-top: 4rem;">
 @include('pub::parts.messages')
 
 @section('header')

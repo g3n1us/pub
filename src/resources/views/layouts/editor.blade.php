@@ -5,6 +5,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js editor-bootstrap @stack('body_html_classes')"> <!--<![endif]-->
 <head>
+
 @section('head')
 	<meta charset="utf-8">
 	<!--[if IE]><![endif]-->
@@ -19,8 +20,8 @@
 	<link rel="stylesheet" href="/vendor/pub/additional.css?v=1234">
 @if(Auth::check())
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700" rel="stylesheet">
-	<link rel="stylesheet" href="/vendor/pub/dist/css/both-compiled.min.css">
-	<link rel="stylesheet" href="/vendor/pub/dist/css/private-compiled.min.css">
+<!-- 	<link rel="stylesheet" href="/vendor/pub/dist/css/both-compiled.min.css"> -->
+<!-- 	<link rel="stylesheet" href="/vendor/pub/dist/css/private-compiled.min.css"> -->
 @endif
 <!--
 	<link rel="stylesheet" href="/vendor/pub/_assets/js/vendor/ckeditor_4.6/plugins/prism/lib/prism/prism_patched.min.css">
@@ -30,6 +31,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
 		var article; // do this a better way. This is just to avoid errors for Vue.js
+		window.iframelyapikey = '{{env('IFRAMELY_API_KEY')}}';		
 	</script>
 	<style>
 		.editor-bootstrap .pagination{

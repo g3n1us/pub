@@ -2,7 +2,7 @@
 @php
 $article = $articles->first();
 @endphp
-	<link rel="stylesheet" href="/vendor/pub/js/includes/At.js-master/dist/css/jquery.atwho.min.css">
+<!-- 	<link rel="stylesheet" href="/vendor/pub/js/includes/At.js-master/dist/css/jquery.atwho.min.css"> -->
 
 				<form method="post" id="editorForm" class="pa-1" action="{{ route('article.update', $articles->first(), false) }}">
 				{!! csrf_field() !!}

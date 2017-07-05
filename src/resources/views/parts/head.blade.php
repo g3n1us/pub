@@ -10,22 +10,18 @@
  	<meta name="keywords" content="" /> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- !Bootstrap -->
-	<link rel="stylesheet" href="/vendor/pub/dist/css/both-compiled.min.css">	
-	<link rel="stylesheet" href="/vendor/pub/dist/css/public-compiled.min.css">
-	<link rel="stylesheet" href="/vendor/pub/additional.css?v=1234">
-	<link rel="stylesheet" href="/vendor/pub/js/includes/At.js-master/dist/css/jquery.atwho.min.css">
+	<link rel="stylesheet" href="/vendor/pub/theme/css/theme.min.css">
+<!-- 	<link rel="stylesheet" href="/vendor/pub/js/includes/At.js-master/dist/css/jquery.atwho.min.css"> -->
 @if(Auth::check())
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700" rel="stylesheet">
-	<link rel="stylesheet" href="/vendor/pub/dist/css/private-compiled.min.css">
+<!-- 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700" rel="stylesheet"> -->
+<!-- 	<link rel="stylesheet" href="/vendor/pub/dist/editor/css/pub-editor.min.css"> -->
 @endif
-<!--
-	<link rel="stylesheet" href="/vendor/pub/_assets/js/vendor/ckeditor_4.6/plugins/prism/lib/prism/prism_patched.min.css">
-	<script src="/vendor/pub/_assets/js/vendor/ckeditor_4.6/plugins/prism/lib/prism/prism_patched.min.js"></script>
--->
+
 	<script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
 		var article; // do this a better way. This is just to avoid errors for Vue.js
+		window.iframelyapikey = '{{env('IFRAMELY_API_KEY')}}';
 	</script>
 	<style>
 		body{
@@ -38,3 +34,4 @@
 			font-family: 'Roboto Mono', monospace;
 		}
 	</style>
+	
