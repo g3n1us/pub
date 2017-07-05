@@ -242,6 +242,12 @@ Route::group(['middleware' => ['web']], function () {
 	
 	Route::resource('page', 'PageController');
 	
+	Route::get('/', function(Request $request){
+		$page = Page::where('url', '/')->firstOrFail();
+// 		dd($page);
+		return with( new G3n1us\Pub\Controllers\PageController($request))->show($request, $page);
+	});	
+	
 	Route::get('{page}', 'PageController@show');
 	// Other image files are handles by Image class cache routing
 // 	Route::get('{slug}', 'ArticleController@article');

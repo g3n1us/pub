@@ -7,6 +7,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use DB;
 use Page;
 use Brand;
+use User;
 
 use Aws\S3\S3Client;
 
@@ -284,7 +285,10 @@ ooo        oooooo    ooooooo
 				$homepage->name = 'Home';
 				$homepage->description = 'The home page';
 				$homepage->config = [];
-				$homepage->save();	
+				$homepage->save();
+			    
+				$user = User::find(1);
+				$user->groups()->save(new UserGroup(['group' => 'admin']));			    
 					   
 			   $this->done['DB_SETUP_COMPLETE'] = "true"; 
 			   $this->mock_progress();

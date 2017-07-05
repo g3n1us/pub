@@ -1,5 +1,9 @@
 # Pub :beer:
-An opiniated, Laravel based CMS for publications with deep AWS integration, installable via Composer Edit
+An opiniated, Laravel based CMS for publications with deep AWS integration, installable via Composer
+
+## Getting Started
+The best way to get started using Pub is by setting up a dedicated EC2 instance. An instance profile should be set up with administrator priveleges. This way, the installer can set up an S3 bucket and other AWS resources for use with the application. After setup is complete, the extra priveleges that are not needed of the profile should be removed. 
+> IMPORTANT! The instance should not be made publicly accessible at any time during setup and be sure to remove the extra priveleges from the instance profile
 
 ## Installation
 Install Laravel as normal. 
@@ -9,10 +13,10 @@ It is best to install Pub on top of a fresh Laravel installation. The Pub CLI in
 
 After Laravel is installed, setup the basic authentication scaffolding by running:
 ~~~~
-php artisan make auth
+php artisan make:auth
 php artisan migrate
 ~~~~
-
+> Note: if you get the error: `SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes` Add the following to the `boot()` method of `AppServiceProvider`: `Schema::defaultStringLength(191);`
 
 Install via Composer:
 
