@@ -19,7 +19,7 @@
 						
 						@if($author->displayname)
 						<h5 style="font-weight: normal"><a href="/author/{{$author->displayname}}">
-							<img class="rounded-circle pull-left mr-1" src="{{$author->mugshot}}">
+							<img class="rounded-circle pull-left mr-1" src="{{$author->mugshot}}" style="max-width: 150px;">
 							{{$author->displayname}}</a></h5>
 						<nav class="author-social">
 							@if($author->twitter)
