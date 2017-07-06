@@ -8,6 +8,9 @@ use DB;
 use Page;
 use Brand;
 use User;
+use UserGroup;
+
+use Schema;
 
 use Aws\S3\S3Client;
 
@@ -267,28 +270,43 @@ ooo        oooooo    ooooooo
 	    
 	    if(!array_key_exists('DB_SETUP_COMPLETE', $this->done)){
 		    if ($this->confirm('You are now ready to set up the database. Do you wish to continue?')) {
-				$sql = file_get_contents(__DIR__.'/build.sql');
-				DB::connection()->reconnect();
-// 				dd(DB::connection());
-				$pdo = DB::connection()->getPdo();
-				$pdo->exec($sql);
+			    if(!Schema::hasTable('areas')){
+					$sql = file_get_contents(__DIR__.'/build.sql');
+					DB::connection()->reconnect();
+	// 				dd(DB::connection());
+					$pdo = DB::connection()->getPdo();
+					$pdo->exec($sql);				    
+			    }
 				
-				$brand = new Brand;
-				$brand->slug = 'def';
-				$brand->logo = '/vendor/pub/images/SpringfieldShopper.png';
-				$brand->name = 'Default';
-				$brand->handle = 'default';
-				$brand->save();
+				if(!Brand::first()){
+					$brand = new Brand;
+					$brand->slug = 'def';
+					$brand->logo = '/vendor/pub/theme/images/SpringfieldShopper.png';
+					$brand->name = 'Default';
+					$brand->handle = 'default';
+					$brand->save();					
+				}
 		
-				$homepage = new Page;
-				$homepage->url = '/';
-				$homepage->name = 'Home';
-				$homepage->description = 'The home page';
-				$homepage->config = [];
-				$homepage->save();
+				if(!Page::first()){
+					$homepage = new Page;
+					$homepage->url = '/';
+					$homepage->name = 'Home';
+					$homepage->description = 'The home page';
+					$homepage->config = [];
+					$homepage->save();					
+				}
 			    
-				$user = User::find(1);
-				$user->groups()->save(new UserGroup(['group' => 'admin']));			    
+				$user = User::first();
+				if(!$user){
+					$user = new User;
+					$user->name = 'Admin';
+					$user->username = 'admin';
+					$user->email = $this->ask('Enter an email address for the super admin user:');
+					$user->password = bcrypt($this->secret('Enter a password for the super admin user:'));
+					$user->save();
+					
+					$user->groups()->save(new UserGroup(['group' => 'admin']));			    
+				}
 					   
 			   $this->done['DB_SETUP_COMPLETE'] = "true"; 
 			   $this->mock_progress();
@@ -396,6 +414,8 @@ ooo        oooooo    ooooooo
 $this->comment("😊 Your configuration has been written and is available to Laravel. There are just a couple more steps, and you are completely done.
 
 • You should now run `php artisan vendor:publish` to copy the required assets from Pub into Laravel.
+
+• Next run `composer dumpautoload` to clear the cached seeder class
 
 • Next, open the file: routes/web.php and comment out the declared route for the homepage:
 
