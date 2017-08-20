@@ -2,6 +2,13 @@
     "name": "g3n1us/pub",
     "description": "Open Source Publication Software",
     "type": "php",
+    "license": "GPL-3.0",
+    "keywords": [
+        "Laravel",
+        "publishing",
+        "media",
+        "newspaper"
+     ] 
     "authors": [
         {
             "name": "Sean Bethel",
