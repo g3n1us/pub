@@ -71,4 +71,4 @@ to send email using the built in sendmail executable.
 
 > Note: Don't use this for production! You should use a dedicated mail option. Check out `config/mail.php` to set this and other mail related options.
 
-Cheers! :beers:
+Cheers! :beers: :beers:
